@@ -22,16 +22,24 @@ void Starfield::resize(int width, int height) {
         delete[] m_stars;
     }
 
-    m_no_stars = (width * height) / 480;
+    m_no_stars = (width * height) / 160;
     m_stars = new Star[m_no_stars];
 
     for (int i = 0; i < m_no_stars; i++) {
-        int size = m_stars[i].size = 1 + rand() % 4;
+        int size = 1;
+
+        if (rand() % 10 == 0) {
+            size = 3;
+        } else if (rand() % 6 == 0) {
+            size = 2;
+        }
+
+        m_stars[i].size = size;
         m_stars[i].x = rand() % (width + size * 2);
         m_stars[i].y = rand() % (height + size * 2);
         m_stars[i].r = 255;
         m_stars[i].g = 255;
-        m_stars[i].b = 155 + rand() % 100;
+        m_stars[i].b = 255;
         m_stars[i].a = 255;
     }
 }
@@ -43,7 +51,7 @@ void Starfield::update(float dt) {
         auto &star = m_stars[i];
 
         if (rand() % chance_rand == 0) {
-            star.a = 125 + rand() % 130;
+            star.a = 150 + rand() % 106;
         }
     }
 }

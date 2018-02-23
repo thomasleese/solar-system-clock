@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 
 #include <SDL2/SDL.h>
@@ -25,6 +26,8 @@ void solarsystemclock::initialise_sdl() {
         std::cerr << "Couldn't initialise SDL_Image: " << IMG_GetError() << std::endl;
         abort();
     }
+
+    srand(time(nullptr));
 }
 
 void solarsystemclock::deinitialise_sdl() {
