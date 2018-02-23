@@ -5,7 +5,7 @@ using namespace solarsystemclock;
 int main(int argc, char *argv[]) {
     initialise_sdl();
 
-    Window window(500, 500);
+    Window window(800, 600);
     window.mainloop();
 
     deinitialise_sdl();
