@@ -31,7 +31,7 @@ void Starfield::resize(int width, int height) {
         m_stars[i].y = rand() % (height + size * 2);
         m_stars[i].r = 255;
         m_stars[i].g = 255;
-        m_stars[i].b = 200 + rand() % 55;
+        m_stars[i].b = 155 + rand() % 100;
         m_stars[i].a = 255;
     }
 }
