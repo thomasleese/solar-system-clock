@@ -36,7 +36,7 @@ Window::Window(int width, int height) {
         "Solar System Clock",
         SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED,
         width, height,
-        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
+        SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI
     );
 
     if (m_window == nullptr) {
@@ -50,6 +50,14 @@ Window::Window(int width, int height) {
         std::cerr << "Couldn't initialise renderer: " << SDL_GetError() << std::endl;
         abort();
     }
+
+    int window_width, window_height;
+    SDL_GetWindowSize(m_window, &window_width, &window_height);
+
+    int renderer_width, renderer_height;
+    SDL_GetRendererOutputSize(m_renderer, &renderer_width, &renderer_height);
+
+    SDL_RenderSetScale(m_renderer, renderer_width / window_width, renderer_height / window_height);
 
     m_starfield = new Starfield(m_renderer);
 
@@ -68,10 +76,16 @@ void Window::resize(int width, int height) {
 }
 
 void Window::mainloop() {
+    int t = 0.0;
+    const int dt = (1.0 / 60.0) * 1000.0;
+
+    int current_time = SDL_GetTicks();
+    int accumulator = 0.0;
+
     SDL_Event event;
 
     while (true) {
-		while (SDL_PollEvent(&event) != 0) {
+        while (SDL_PollEvent(&event) != 0) {
             switch (event.type) {
             case SDL_QUIT:
                 return;
@@ -84,7 +98,22 @@ void Window::mainloop() {
             }
 		}
 
-        m_starfield->render(0.0);
+        int new_time = SDL_GetTicks();
+        int frame_time = new_time - current_time;
+        current_time = new_time;
+
+        accumulator += frame_time;
+
+        while (accumulator >= dt) {
+            double dt_seconds = dt / 1000.0;
+
+            m_starfield->update(dt_seconds);
+
+            accumulator -= dt;
+            t += dt;
+        }
+
+        m_starfield->draw();
 
 		SDL_RenderPresent(m_renderer);
 	}
