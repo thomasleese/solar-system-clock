@@ -1,2 +1,3 @@
-# solar-system-clock
-Solar System Clock inspired by Van Cleef &amp; Arpels' Midnight Planétarium Watch.
+# Solar System Clock
+
+Solar System Clock inspired by Van Cleef &amp; Arpels’ Midnight Planétarium Watch.
