@@ -7,6 +7,7 @@ namespace solarsystemclock {
     void deinitialise_sdl();
 
     class Starfield;
+    class OrbitRing;
 
     class Window {
     public:
@@ -21,6 +22,7 @@ namespace solarsystemclock {
         SDL_Renderer *m_renderer;
 
         Starfield *m_starfield;
+        OrbitRing *m_orbit_ring;
     };
 
 }

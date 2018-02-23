@@ -9,7 +9,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++1z -Wall -pedantic")
 
-set(LIBS sdl2 sdl2_image)
+set(LIBS sdl2 sdl2_image sdl2_gfx)
 
 include_directories(include)
 

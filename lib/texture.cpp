@@ -35,6 +35,22 @@ Texture::Texture(SDL_Renderer *renderer, std::string filename) {
     SDL_FreeSurface(surface);
 }
 
+Texture::Texture(SDL_Texture *texture, int width, int height) {
+    m_texture = texture;
+
+    m_src_rect = new SDL_Rect;
+    m_src_rect->x = 0;
+    m_src_rect->y = 0;
+    m_src_rect->w = width;
+    m_src_rect->h = height;
+
+    m_dest_rect = new SDL_Rect;
+    m_dest_rect->x = 0;
+    m_dest_rect->y = 0;
+    m_dest_rect->w = width;
+    m_dest_rect->h = height;
+}
+
 Texture::~Texture() {
     delete m_src_rect;
     delete m_dest_rect;
@@ -51,5 +67,11 @@ void Texture::draw(SDL_Renderer *renderer, int x, int y, int width, int height, 
     SDL_SetTextureColorMod(m_texture, r, g, b);
     SDL_SetTextureAlphaMod(m_texture, a);
 
+    SDL_SetTextureBlendMode(m_texture, SDL_BLENDMODE_BLEND);
+
     SDL_RenderCopy(renderer, m_texture, m_src_rect, m_dest_rect);
+}
+
+void Texture::draw(SDL_Renderer *renderer, int x, int y, int r, int g, int b, int a) {
+    draw(renderer, x, y, m_src_rect->w, m_src_rect->h, r, g, b, a);
 }
