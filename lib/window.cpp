@@ -2,8 +2,11 @@
 
 using namespace solarsystemclock;
 
-int main(int argc, char *argv[]) {
-    Window window(500, 500);
 
-    return 0;
+Window::Window(int width, int height) {
+
+}
+
+Window::~Window() {
+
 }
