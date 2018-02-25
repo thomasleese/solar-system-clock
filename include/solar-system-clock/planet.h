@@ -5,7 +5,7 @@ namespace solarsystemclock {
     class Texture;
 
     namespace layers {
-        class Orbits;
+        class OrbitRingss;
     }
 
     class Planet {
@@ -13,7 +13,7 @@ namespace solarsystemclock {
         Planet(SDL_Renderer *renderer, int orbit);
         ~Planet();
 
-        void resize(int width, int height, layers::Orbits *orbits);
+        void resize(int width, int height, layers::OrbitRingss *orbits);
         void update(float dt);
         void draw();
 

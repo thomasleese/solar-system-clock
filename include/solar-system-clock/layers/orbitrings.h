@@ -8,10 +8,10 @@ namespace solarsystemclock {
 
 namespace solarsystemclock::layers {
 
-    class Orbits : public Layer {
+    class OrbitRingss : public Layer {
     public:
-        Orbits(SDL_Renderer *renderer);
-        ~Orbits();
+        OrbitRingss(SDL_Renderer *renderer);
+        ~OrbitRingss();
 
         int radius(int orbit) const;
 

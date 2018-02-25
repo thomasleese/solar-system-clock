@@ -7,12 +7,8 @@ namespace solarsystemclock {
     void deinitialise_sdl();
 
     namespace layers {
-        class Starfield;
-        class Orbits;
-        class Sun;
+        class SolarSystemClock;
     }
-
-    class Planet;
 
     class Window {
     public:
@@ -26,10 +22,7 @@ namespace solarsystemclock {
         SDL_Window *m_window;
         SDL_Renderer *m_renderer;
 
-        layers::Starfield *m_starfield;
-        layers::Orbits *m_orbits;
-        layers::Sun *m_sun;
-        Planet *m_planet;
+        layers::SolarSystemClock *m_clock;
     };
 
 }

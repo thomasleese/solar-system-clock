@@ -4,10 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "solar-system-clock/layers/starfield.h"
-#include "solar-system-clock/layers/orbits.h"
-#include "solar-system-clock/layers/sun.h"
-#include "solar-system-clock/planet.h"
+#include "solar-system-clock/layers/solarsystemclock.h"
 
 #include "solar-system-clock/window.h"
 
@@ -66,29 +63,20 @@ Window::Window(int width, int height) {
 
     SDL_RenderSetScale(m_renderer, renderer_width / window_width, renderer_height / window_height);
 
-    m_starfield = new Starfield(m_renderer);
-    m_orbits = new Orbits(m_renderer);
-    m_sun = new Sun(m_renderer);
-    m_planet = new Planet(m_renderer, 1);
+    m_clock = new SolarSystemClock(m_renderer);
 
     resize(width, height);
 }
 
 Window::~Window() {
-    delete m_starfield;
-    delete m_orbits;
-    delete m_sun;
-    delete m_planet;
+    delete m_clock;
 
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
 }
 
 void Window::resize(int width, int height) {
-    m_starfield->resize(width, height);
-    m_orbits->resize(width, height);
-    m_sun->resize(width, height);
-    m_planet->resize(width, height, m_orbits);
+    m_clock->resize(width, height);
 }
 
 void Window::mainloop() {
@@ -123,17 +111,13 @@ void Window::mainloop() {
         while (accumulator >= dt) {
             double dt_seconds = dt / 1000.0;
 
-            m_starfield->update(dt_seconds);
-            m_sun->update(dt_seconds);
+            m_clock->update(dt_seconds);
 
             accumulator -= dt;
             t += dt;
         }
 
-        m_starfield->draw();
-        m_orbits->draw();
-        m_sun->draw();
-        m_planet->draw();
+        m_clock->draw();
 
 		SDL_RenderPresent(m_renderer);
 	}

@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 
 #include "solar-system-clock/texture.h"
-#include "solar-system-clock/layers/orbits.h"
+#include "solar-system-clock/layers/orbitrings.h"
 
 #include "solar-system-clock/planet.h"
 
@@ -23,7 +23,7 @@ Planet::~Planet() {
     delete m_shadow_texture;
 }
 
-void Planet::resize(int width, int height, Orbits *orbits) {
+void Planet::resize(int width, int height, OrbitRingss *orbits) {
     m_cx = width / 2;
     m_cy = height / 2;
 
