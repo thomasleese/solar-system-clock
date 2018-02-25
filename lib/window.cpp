@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "solar-system-clock/orbitring.h"
+#include "solar-system-clock/orbits.h"
 #include "solar-system-clock/starfield.h"
 
 #include "solar-system-clock/window.h"
@@ -64,15 +64,14 @@ Window::Window(int width, int height) {
     SDL_RenderSetScale(m_renderer, renderer_width / window_width, renderer_height / window_height);
 
     m_starfield = new Starfield(m_renderer);
-
-    m_orbit_ring = new OrbitRing(m_renderer, 100, 5);
+    m_orbits = new Orbits(m_renderer);
 
     resize(width, height);
 }
 
 Window::~Window() {
     delete m_starfield;
-    delete m_orbit_ring;
+    delete m_orbits;
 
     SDL_DestroyRenderer(m_renderer);
     SDL_DestroyWindow(m_window);
@@ -80,6 +79,7 @@ Window::~Window() {
 
 void Window::resize(int width, int height) {
     m_starfield->resize(width, height);
+    m_orbits->resize(width, height);
 }
 
 void Window::mainloop() {
@@ -121,7 +121,7 @@ void Window::mainloop() {
         }
 
         m_starfield->draw();
-        m_orbit_ring->draw(m_renderer, 400, 300, 255, 255, 255, 255);
+        m_orbits->draw();
 
 		SDL_RenderPresent(m_renderer);
 	}

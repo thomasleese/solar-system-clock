@@ -59,8 +59,8 @@ Texture::~Texture() {
 }
 
 void Texture::draw(SDL_Renderer *renderer, int x, int y, int width, int height, int r, int g, int b, int a) {
-    m_dest_rect->x = x - (m_src_rect->w / 2.0);
-    m_dest_rect->y = y - (m_src_rect->h / 2.0);
+    m_dest_rect->x = x - (width / 2.0);
+    m_dest_rect->y = y - (height / 2.0);
     m_dest_rect->w = width;
     m_dest_rect->h = height;
 

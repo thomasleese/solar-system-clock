@@ -57,7 +57,7 @@ void Starfield::update(float dt) {
 }
 
 void Starfield::draw() {
-    SDL_SetRenderDrawColor(m_renderer, 5, 45, 109, 255);
+    SDL_SetRenderDrawColor(m_renderer, 10, 60, 130, 255);
     SDL_RenderClear(m_renderer);
 
     for (int i = 0; i < m_no_stars; i++) {
