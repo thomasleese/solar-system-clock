@@ -5,11 +5,11 @@
 
 #include "solar-system-clock/texture.h"
 
-#include "solar-system-clock/starfield.h"
+#include "solar-system-clock/layers/starfield.h"
 
-using namespace solarsystemclock;
+using namespace solarsystemclock::layers;
 
-Starfield::Starfield(SDL_Renderer *renderer) : m_renderer(renderer), m_stars(nullptr) {
+Starfield::Starfield(SDL_Renderer *renderer) : Layer(renderer), m_stars(nullptr) {
     m_star_texture = new Texture(renderer, "images/star.png");
 }
 

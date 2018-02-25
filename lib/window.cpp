@@ -4,14 +4,15 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "solar-system-clock/starfield.h"
-#include "solar-system-clock/orbits.h"
-#include "solar-system-clock/sun.h"
+#include "solar-system-clock/layers/starfield.h"
+#include "solar-system-clock/layers/orbits.h"
+#include "solar-system-clock/layers/sun.h"
 #include "solar-system-clock/planet.h"
 
 #include "solar-system-clock/window.h"
 
 using namespace solarsystemclock;
+using namespace solarsystemclock::layers;
 
 void solarsystemclock::initialise_sdl() {
     if (SDL_Init(SDL_INIT_VIDEO) < 0) {

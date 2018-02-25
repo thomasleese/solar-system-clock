@@ -1,8 +1,12 @@
+#include "solar-system-clock/layers/layer.h"
+
 struct SDL_Renderer;
 
 namespace solarsystemclock {
-
     class Texture;
+}
+
+namespace solarsystemclock::layers {
 
     struct Star {
         int x, y;
@@ -10,18 +14,16 @@ namespace solarsystemclock {
         int r, g, b, a;
     };
 
-    class Starfield {
+    class Starfield : public Layer {
     public:
         Starfield(SDL_Renderer *renderer);
         ~Starfield();
 
-        void resize(int width, int height);
-        void update(float dt);
-        void draw();
+        void resize(int width, int height) override;
+        void update(float dt) override;
+        void draw() override;
 
     private:
-        SDL_Renderer *m_renderer;
-
         Texture *m_star_texture;
 
         Star *m_stars;

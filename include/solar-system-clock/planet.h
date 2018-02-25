@@ -3,14 +3,17 @@ struct SDL_Renderer;
 namespace solarsystemclock {
 
     class Texture;
-    class Orbits;
+
+    namespace layers {
+        class Orbits;
+    }
 
     class Planet {
     public:
         Planet(SDL_Renderer *renderer, int orbit);
         ~Planet();
 
-        void resize(int width, int height, Orbits *orbits);
+        void resize(int width, int height, layers::Orbits *orbits);
         void update(float dt);
         void draw();
 

@@ -5,11 +5,11 @@
 
 #include "solar-system-clock/texture.h"
 
-#include "solar-system-clock/orbits.h"
+#include "solar-system-clock/layers/orbits.h"
 
-using namespace solarsystemclock;
+using namespace solarsystemclock::layers;
 
-Orbits::Orbits(SDL_Renderer *renderer) : m_renderer(renderer) {
+Orbits::Orbits(SDL_Renderer *renderer) : Layer(renderer) {
     m_texture = new Texture(renderer, "images/orbits.png");
 }
 

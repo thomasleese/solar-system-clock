@@ -5,11 +5,11 @@
 
 #include "solar-system-clock/texture.h"
 
-#include "solar-system-clock/sun.h"
+#include "solar-system-clock/layers/sun.h"
 
-using namespace solarsystemclock;
+using namespace solarsystemclock::layers;
 
-Sun::Sun(SDL_Renderer *renderer) : m_renderer(renderer) {
+Sun::Sun(SDL_Renderer *renderer) : Layer(renderer) {
     m_texture = new Texture(renderer, "images/sun.png");
 }
 

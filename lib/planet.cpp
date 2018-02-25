@@ -4,11 +4,12 @@
 #include <SDL2/SDL.h>
 
 #include "solar-system-clock/texture.h"
-#include "solar-system-clock/orbits.h"
+#include "solar-system-clock/layers/orbits.h"
 
 #include "solar-system-clock/planet.h"
 
 using namespace solarsystemclock;
+using namespace solarsystemclock::layers;
 
 Planet::Planet(SDL_Renderer *renderer, int orbit) : m_renderer(renderer), m_orbit(orbit) {
     m_bg_texture = new Texture(renderer, "images/planet-background.png");
