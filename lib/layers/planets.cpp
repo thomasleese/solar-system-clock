@@ -1,47 +1,50 @@
 #include <algorithm>
+#include <cmath>
 #include <iostream>
 
 #include <SDL2/SDL.h>
 
-#include "solar-system-clock/sprites/planet.h"
+#include "solar-system-clock/clock.h"
+#include "solar-system-clock/planet.h"
+#include "solar-system-clock/texture.h"
 
 #include "solar-system-clock/layers/planets.h"
 
 using namespace solarsystemclock;
-using namespace solarsystemclock::sprites;
 using namespace solarsystemclock::layers;
 
-Planets::Planets(SDL_Renderer *renderer, layers::OrbitRingss *orbit_rings) : Layer(renderer), m_orbit_rings(orbit_rings) {
-    m_planets.push_back(new Planet(renderer, 0, 4780, 0x80, 0x80, 0x80));
-    m_planets.push_back(new Planet(renderer, 1, 12104, 0xff, 0x90, 0x00));
-    m_planets.push_back(new Planet(renderer, 2, 12756, 0x00, 0xc0, 0x50));
-    m_planets.push_back(new Planet(renderer, 3, 6780, 0xef, 0x10, 0x00));
-    m_planets.push_back(new Planet(renderer, 4, 139822, 0xe0, 0xa0, 0x70));
-    m_planets.push_back(new Planet(renderer, 5, 116464, 0xef, 0xb0, 0x20));
-    m_planets.push_back(new Planet(renderer, 6, 50724, 0x00, 0xb0, 0xc0));
-    m_planets.push_back(new Planet(renderer, 7, 49248, 0x15, 0x40, 0xff));
+Planets::Planets(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
+    m_bg_texture = new Texture(renderer, "images/planet-background.png");
+    m_ball_texture = new Texture(renderer, "images/planet-ball.png");
+    m_shadow_texture = new Texture(renderer, "images/planet-shadow.png");
 }
 
 Planets::~Planets() {
-    for (auto &planet : m_planets) {
-        delete planet;
-    }
+    delete m_bg_texture;
+    delete m_ball_texture;
+    delete m_shadow_texture;
 }
 
 void Planets::resize(int width, int height) {
-    for (auto &planet : m_planets) {
-        planet->resize(width, height, m_orbit_rings);
-    }
+    m_cx = width / 2;
+    m_cy = height / 2;
 }
 
 void Planets::update(double dt) {
-    for (auto &planet : m_planets) {
+    for (auto &planet : m_clock->planets()) {
         planet->update(dt);
     }
 }
 
 void Planets::draw() {
-    for (auto &planet : m_planets) {
-        planet->draw();
+    for (auto &planet : m_clock->planets()) {
+        int x = m_cx + std::sin(planet->angle()) * planet->radius();
+        int y = m_cy + std::cos(planet->angle()) * planet->radius();
+
+        double degrees = 180 - planet->angle() * (180.0 / 3.141592653589793238463);
+
+        m_shadow_texture->draw(m_renderer, x, y, planet->size() * 2, planet->size() * 12.5, degrees, planet->red(), planet->green(), planet->blue(), 200);
+        m_bg_texture->draw(m_renderer, x, y, planet->size(), planet->size(), degrees, planet->red(), planet->green(), planet->blue(), 192);
+        m_ball_texture->draw(m_renderer, x, y, planet->size(), planet->size(), degrees, 255, 255, 255, 255);
     }
 }

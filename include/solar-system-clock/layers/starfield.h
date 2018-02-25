@@ -3,12 +3,11 @@
 struct SDL_Renderer;
 
 namespace solarsystemclock {
+    class Clock;
     class Texture;
 }
 
 namespace solarsystemclock::layers {
-
-    class OrbitRingss;
 
     struct Star {
         double x, y;
@@ -17,26 +16,28 @@ namespace solarsystemclock::layers {
         int orbit;
 
         int cx, cy;
-        double radius, angle;
+        double radius, orig_angle, angle;
 
         void update_position();
     };
 
     class Starfield : public Layer {
     public:
-        Starfield(SDL_Renderer *renderer, OrbitRingss *orbit_rings);
+        Starfield(SDL_Renderer *renderer, Clock *clock);
         ~Starfield();
 
-        void rotate_stars(int orbit, double amount);
+        void set_rotation(int orbit, double angle);
 
         void resize(int width, int height) override;
         void update(double dt) override;
         void draw() override;
 
     private:
-        layers::OrbitRingss *m_orbit_rings;
+        Clock *m_clock;
 
         Texture *m_star_texture;
+
+        double m_outer_angle;
 
         Star *m_stars;
         int m_no_stars;

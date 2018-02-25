@@ -4,8 +4,9 @@
 
 #include <SDL2/SDL.h>
 
+#include "solar-system-clock/clock.h"
+#include "solar-system-clock/planet.h"
 #include "solar-system-clock/texture.h"
-#include "solar-system-clock/layers/orbitrings.h"
 
 #include "solar-system-clock/layers/starfield.h"
 
@@ -16,7 +17,7 @@ void Star::update_position() {
     y = cy + std::cos(angle) * radius;
 }
 
-Starfield::Starfield(SDL_Renderer *renderer, layers::OrbitRingss *orbit_rings) : Layer(renderer), m_orbit_rings(orbit_rings), m_stars(nullptr) {
+Starfield::Starfield(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock), m_stars(nullptr) {
     m_star_texture = new Texture(renderer, "images/star.png");
 }
 
@@ -24,12 +25,12 @@ Starfield::~Starfield() {
     delete[] m_stars;
 }
 
-void Starfield::rotate_stars(int orbit, double amount) {
+void Starfield::set_rotation(int orbit, double angle) {
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];
 
         if (star.orbit == orbit) {
-            star.angle += amount;
+            star.angle = star.orig_angle + angle;
             star.update_position();
         }
     }
@@ -40,15 +41,15 @@ void Starfield::resize(int width, int height) {
         delete[] m_stars;
     }
 
-    int orbits[] = {
-        m_orbit_rings->radius(0),
-        m_orbit_rings->radius(1),
-        m_orbit_rings->radius(2),
-        m_orbit_rings->radius(3),
-        m_orbit_rings->radius(4),
-        m_orbit_rings->radius(5),
-        m_orbit_rings->radius(6),
-        m_orbit_rings->radius(7),
+    double orbits[] = {
+        m_clock->orbits_radius(0),
+        m_clock->orbits_radius(1),
+        m_clock->orbits_radius(2),
+        m_clock->orbits_radius(3),
+        m_clock->orbits_radius(4),
+        m_clock->orbits_radius(5),
+        m_clock->orbits_radius(6),
+        m_clock->orbits_radius(7),
     };
 
     int hw = width / 2;
@@ -75,7 +76,7 @@ void Starfield::resize(int width, int height) {
         m_stars[i].cx = width / 2;
         m_stars[i].cy = height / 2;
         int radius = m_stars[i].radius = rand() % max_radius;
-        m_stars[i].angle = (rand() % 1440) * 0.25 * M_PI / 180.0;
+        m_stars[i].orig_angle = m_stars[i].angle = (rand() % 1440) * 0.25 * M_PI / 180.0;
 
         m_stars[i].orbit = 8;
 
@@ -92,6 +93,8 @@ void Starfield::resize(int width, int height) {
 
         m_stars[i].update_position();
     }
+
+    m_outer_angle = 0;
 }
 
 void Starfield::update(double dt) {
@@ -106,10 +109,11 @@ void Starfield::update(double dt) {
     }
 
     for (int orbit = 0; orbit <= 7; orbit++) {
-        rotate_stars(orbit, -dt * (orbit + 1) * 0.1);
+        set_rotation(orbit, m_clock->planet(orbit)->angle());
     }
 
-    rotate_stars(8, -dt * 0.02);
+    m_outer_angle -= dt * 0.02;
+    set_rotation(8, m_outer_angle);
 }
 
 void Starfield::draw() {

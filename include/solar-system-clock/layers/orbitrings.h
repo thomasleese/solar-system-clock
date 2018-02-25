@@ -3,23 +3,22 @@
 struct SDL_Renderer;
 
 namespace solarsystemclock {
+    class Clock;
     class Texture;
 }
 
 namespace solarsystemclock::layers {
 
-    class OrbitRingss : public Layer {
+    class OrbitRings : public Layer {
     public:
-        OrbitRingss(SDL_Renderer *renderer);
-        ~OrbitRingss();
-
-        double gap() const;
-        int radius(int orbit) const;
+        OrbitRings(SDL_Renderer *renderer, Clock *clock);
+        ~OrbitRings();
 
         void resize(int width, int height) override;
         void draw() override;
 
     private:
+        Clock *m_clock;
         Texture *m_texture;
 
         int m_size, m_cx, m_cy;

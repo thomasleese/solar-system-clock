@@ -3,39 +3,27 @@
 
 #include <SDL2/SDL.h>
 
+#include "solar-system-clock/clock.h"
 #include "solar-system-clock/texture.h"
 
 #include "solar-system-clock/layers/orbitrings.h"
 
 using namespace solarsystemclock::layers;
 
-OrbitRingss::OrbitRingss(SDL_Renderer *renderer) : Layer(renderer) {
+OrbitRings::OrbitRings(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
     m_texture = new Texture(renderer, "images/orbits.png");
 }
 
-OrbitRingss::~OrbitRingss() {
+OrbitRings::~OrbitRings() {
     delete m_texture;
 }
 
-double OrbitRingss::gap() const {
-    double scale = m_size / 1024.0;
-    return 55.f * scale;
-}
-
-int OrbitRingss::radius(int orbit) const {
-    double scale = m_size / 1024.0;
-    int start = 100 * scale;
-
-    return start + gap() * orbit;
-}
-
-void OrbitRingss::resize(int width, int height) {
-    m_size = std::min(width, height) * 0.9;
-
+void OrbitRings::resize(int width, int height) {
+    m_size = m_clock->orbits_size();
     m_cx = width / 2;
     m_cy = height / 2;
 }
 
-void OrbitRingss::draw() {
+void OrbitRings::draw() {
     m_texture->draw(m_renderer, m_cx, m_cy, m_size, m_size, 255, 255, 255, 255);
 }
