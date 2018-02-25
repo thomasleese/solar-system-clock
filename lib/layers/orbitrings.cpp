@@ -17,13 +17,16 @@ OrbitRingss::~OrbitRingss() {
     delete m_texture;
 }
 
+float OrbitRingss::gap() const {
+    float scale = m_size / 1024.0;
+    return 55.f * scale;
+}
+
 int OrbitRingss::radius(int orbit) const {
     float scale = m_size / 1024.0;
-
     int start = 100 * scale;
-    int gap = 55 * scale;
 
-    return start + gap * orbit;
+    return start + gap() * orbit;
 }
 
 void OrbitRingss::resize(int width, int height) {
