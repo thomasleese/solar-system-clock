@@ -9,7 +9,10 @@ namespace solarsystemclock {
 
         double size() const;
         double radius() const;
-        double angle() const;
+
+        double angle() const {
+            return m_angle;
+        }
 
         int red() const {
             return m_red;

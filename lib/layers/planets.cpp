@@ -30,18 +30,12 @@ void Planets::resize(int width, int height) {
     m_cy = height / 2;
 }
 
-void Planets::update(double dt) {
-    for (auto &planet : m_clock->planets()) {
-        planet->update(dt);
-    }
-}
-
 void Planets::draw() {
     for (auto &planet : m_clock->planets()) {
         int x = m_cx + std::sin(planet->angle()) * planet->radius();
         int y = m_cy + std::cos(planet->angle()) * planet->radius();
 
-        double degrees = 180 - planet->angle() * (180.0 / 3.141592653589793238463);
+        double degrees = 180.0 - planet->angle() * 180.0 / M_PI;
 
         m_shadow_texture->draw(m_renderer, x, y, planet->size() * 2, planet->size() * 12.5, degrees, planet->red(), planet->green(), planet->blue(), 200);
         m_bg_texture->draw(m_renderer, x, y, planet->size(), planet->size(), degrees, planet->red(), planet->green(), planet->blue(), 192);

@@ -1,14 +1,17 @@
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 
 #include "solar-system-clock/clock.h"
 
 #include "solar-system-clock/planet.h"
 
+using namespace std::chrono;
+
 using namespace solarsystemclock;
 
 Planet::Planet(int orbit, int diameter, int red, int green, int blue, double orbital_period, double orbit_at_2000) : m_orbit(orbit), m_diameter(diameter), m_red(red), m_green(green), m_blue(blue), m_orbital_period(orbital_period), m_orbit_at_2000(orbit_at_2000) {
-    m_angle = 0;
+    m_angle = orbit_at_2000;
 }
 
 Planet::~Planet() {
@@ -23,10 +26,6 @@ double Planet::radius() const {
     return m_radius;
 }
 
-double Planet::angle() const {
-    return m_angle;
-}
-
 void Planet::resize(Clock *clock) {
     m_radius = clock->orbits_radius(m_orbit);
 
@@ -39,5 +38,5 @@ void Planet::resize(Clock *clock) {
 }
 
 void Planet::update(double dt) {
-    m_angle -= dt * (m_orbit + 1) * 0.1f;
+    m_angle += 1.0 / m_orbital_period * dt * 0.1;
 }

@@ -10,6 +10,7 @@ namespace solarsystemclock {
         ~Clock();
 
         void resize(int width, int height);
+        void update(double dt);
 
         double size() const;
 

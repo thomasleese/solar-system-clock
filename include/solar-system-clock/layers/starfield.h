@@ -37,8 +37,6 @@ namespace solarsystemclock::layers {
 
         Texture *m_star_texture;
 
-        double m_outer_angle;
-
         Star *m_stars;
         int m_no_stars;
     };

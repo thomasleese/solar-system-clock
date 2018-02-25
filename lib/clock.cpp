@@ -32,6 +32,12 @@ void Clock::resize(int width, int height) {
     }
 }
 
+void Clock::update(double dt) {
+    for (auto &planet : m_planets) {
+        planet->update(dt);
+    }
+}
+
 double Clock::size() const {
     return m_size;
 }

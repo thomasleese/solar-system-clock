@@ -93,8 +93,6 @@ void Starfield::resize(int width, int height) {
 
         m_stars[i].update_position();
     }
-
-    m_outer_angle = 0;
 }
 
 void Starfield::update(double dt) {
@@ -112,8 +110,7 @@ void Starfield::update(double dt) {
         set_rotation(orbit, m_clock->planet(orbit)->angle());
     }
 
-    m_outer_angle -= dt * 0.02;
-    set_rotation(8, m_outer_angle);
+    set_rotation(8, m_clock->planet(7)->angle() * 1.1);
 }
 
 void Starfield::draw() {
