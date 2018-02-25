@@ -18,6 +18,8 @@ namespace solarsystemclock::layers {
         int cx, cy;
         double radius, orig_angle, angle;
 
+        double radius_proportion;
+
         void update_position();
     };
 

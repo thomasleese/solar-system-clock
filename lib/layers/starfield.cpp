@@ -75,7 +75,7 @@ void Starfield::resize(int width, int height) {
 
         m_stars[i].cx = width / 2;
         m_stars[i].cy = height / 2;
-        int radius = m_stars[i].radius = rand() % max_radius;
+        int radius = m_stars[i].radius = 1 + rand() % max_radius;
         m_stars[i].orig_angle = m_stars[i].angle = (rand() % 1440) * 0.25 * M_PI / 180.0;
 
         m_stars[i].orbit = 8;
@@ -89,7 +89,9 @@ void Starfield::resize(int width, int height) {
         m_stars[i].r = 255;
         m_stars[i].g = 255;
         m_stars[i].b = 255;
-        m_stars[i].a = 255;
+        m_stars[i].a = 256;
+
+        m_stars[i].radius_proportion = m_stars[i].radius / static_cast<double>(max_radius);
 
         m_stars[i].update_position();
     }
@@ -101,8 +103,11 @@ void Starfield::update(double dt) {
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];
 
-        if (rand() % chance_rand == 0) {
-            star.a = 150 + rand() % 106;
+        if (rand() % chance_rand == 0 || star.a == 256) {
+            int minium = std::min(100, static_cast<int>(star.radius_proportion * 400));
+            int extra = std::max(1, static_cast<int>(star.radius_proportion * 300));
+
+            star.a = std::min(255, minium + rand() % extra);
         }
     }
 

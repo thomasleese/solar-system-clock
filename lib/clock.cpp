@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <chrono>
 #include <cmath>
 
 #include "solar-system-clock/planet.h"
@@ -42,8 +43,14 @@ double Clock::size() const {
     return m_size;
 }
 
+double Clock::seconds_angle() const {
+    std::time_t t = std::time(nullptr);
+    int seconds = std::localtime(&t)->tm_sec;
+    return (seconds / 60.0) * M_PI * 2.0;
+}
+
 double Clock::orbits_size() const {
-    return m_size * 0.9;
+    return m_size * 0.8;
 }
 
 double Clock::orbits_scale() const {

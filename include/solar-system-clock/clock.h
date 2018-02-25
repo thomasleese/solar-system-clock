@@ -14,6 +14,8 @@ namespace solarsystemclock {
 
         double size() const;
 
+        double seconds_angle() const;
+
         double orbits_size() const;
         double orbits_scale() const;
         double orbits_start() const;
