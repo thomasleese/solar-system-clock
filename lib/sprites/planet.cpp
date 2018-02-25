@@ -6,9 +6,10 @@
 #include "solar-system-clock/texture.h"
 #include "solar-system-clock/layers/orbitrings.h"
 
-#include "solar-system-clock/planet.h"
+#include "solar-system-clock/sprites/planet.h"
 
 using namespace solarsystemclock;
+using namespace solarsystemclock::sprites;
 using namespace solarsystemclock::layers;
 
 Planet::Planet(SDL_Renderer *renderer, int orbit) : m_renderer(renderer), m_orbit(orbit) {

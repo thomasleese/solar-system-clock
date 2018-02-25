@@ -1,12 +1,14 @@
 struct SDL_Renderer;
 
 namespace solarsystemclock {
-
     class Texture;
 
     namespace layers {
         class OrbitRingss;
     }
+}
+
+namespace solarsystemclock::sprites {
 
     class Planet {
     public:
