@@ -9,6 +9,8 @@ namespace solarsystemclock {
         Orbits(SDL_Renderer *renderer);
         ~Orbits();
 
+        int radius(int orbit) const;
+
         void resize(int width, int height);
         void draw();
 

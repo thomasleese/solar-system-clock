@@ -17,6 +17,15 @@ Orbits::~Orbits() {
     delete m_texture;
 }
 
+int Orbits::radius(int orbit) const {
+    float scale = m_size / 1024.0;
+
+    int start = 100 * scale;
+    int gap = 55 * scale;
+
+    return start + gap * orbit;
+}
+
 void Orbits::resize(int width, int height) {
     m_size = std::min(width, height) * 0.9;
 
