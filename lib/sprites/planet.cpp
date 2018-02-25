@@ -13,7 +13,7 @@ using namespace solarsystemclock;
 using namespace solarsystemclock::sprites;
 using namespace solarsystemclock::layers;
 
-Planet::Planet(SDL_Renderer *renderer, int orbit, int diameter) : m_renderer(renderer), m_diameter(diameter), m_orbit(orbit) {
+Planet::Planet(SDL_Renderer *renderer, int orbit, int diameter, int red, int green, int blue) : m_renderer(renderer), m_orbit(orbit), m_diameter(diameter), m_r(red), m_g(green), m_b(blue) {
     m_bg_texture = new Texture(renderer, "images/planet-background.png");
     m_ball_texture = new Texture(renderer, "images/planet-ball.png");
     m_shadow_texture = new Texture(renderer, "images/planet-shadow.png");
@@ -33,25 +33,27 @@ void Planet::resize(int width, int height, layers::OrbitRingss *orbit_rings) {
 
     m_radius = orbit_rings->radius(m_orbit);
 
-    float min = orbit_rings->gap() * 0.6f;
-    float max = orbit_rings->gap() * 1.2f;
-    float largest = 139822;
-    float smallest = 4780;
+    double min = orbit_rings->gap() * 0.6f;
+    double max = orbit_rings->gap() * 1.2f;
+    double largest = 139822;
+    double smallest = 4780;
 
-    m_size = ((max - min) / (largest - smallest)) * (static_cast<float>(m_diameter) - smallest) + min;
+    m_size = ((max - min) / (largest - smallest)) * (static_cast<double>(m_diameter) - smallest) + min;
 }
 
-void Planet::update(float dt) {
-    m_angle -= dt * (m_orbit + 1) * 0.2f;
+void Planet::update(double dt) {
+    m_angle -= dt * (m_orbit + 1) * 0.1f;
 }
 
 void Planet::draw() {
-    float angle = m_angle;
+    double angle = m_angle;
 
     int x = m_cx + std::sin(angle) * m_radius;
     int y = m_cy + std::cos(angle) * m_radius;
 
-    m_shadow_texture->draw(m_renderer, x, y, m_size * 2, m_size * 12.5, 255, 0, 0, 200);
-    m_bg_texture->draw(m_renderer, x, y, m_size, m_size, 255, 0, 0, 192);
-    m_ball_texture->draw(m_renderer, x, y, m_size, m_size, 255, 255, 255, 255);
+    double degrees = 180 - angle * (180.0 / 3.141592653589793238463);
+
+    m_shadow_texture->draw(m_renderer, x, y, m_size * 2, m_size * 12.5, degrees, m_r, m_g, m_b, 200);
+    m_bg_texture->draw(m_renderer, x, y, m_size, m_size, degrees, m_r, m_g, m_b, 192);
+    m_ball_texture->draw(m_renderer, x, y, m_size, m_size, degrees, 255, 255, 255, 255);
 }

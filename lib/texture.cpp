@@ -58,7 +58,7 @@ Texture::~Texture() {
     SDL_DestroyTexture(m_texture);
 }
 
-void Texture::draw(SDL_Renderer *renderer, int x, int y, int width, int height, int r, int g, int b, int a) {
+void Texture::draw(SDL_Renderer *renderer, double x, double y, double width, double height, double angle, int r, int g, int b, int a) {
     m_dest_rect->x = x - (width / 2.0);
     m_dest_rect->y = y - (height / 2.0);
     m_dest_rect->w = width;
@@ -69,9 +69,13 @@ void Texture::draw(SDL_Renderer *renderer, int x, int y, int width, int height, 
 
     SDL_SetTextureBlendMode(m_texture, SDL_BLENDMODE_BLEND);
 
-    SDL_RenderCopy(renderer, m_texture, m_src_rect, m_dest_rect);
+    SDL_RenderCopyEx(renderer, m_texture, m_src_rect, m_dest_rect, angle, nullptr, SDL_FLIP_NONE);
 }
 
-void Texture::draw(SDL_Renderer *renderer, int x, int y, int r, int g, int b, int a) {
+void Texture::draw(SDL_Renderer *renderer, double x, double y, double width, double height, int r, int g, int b, int a) {
+    draw(renderer, x, y, width, height, 0.0f, r, g, b, a);
+}
+
+void Texture::draw(SDL_Renderer *renderer, double x, double y, int r, int g, int b, int a) {
     draw(renderer, x, y, m_src_rect->w, m_src_rect->h, r, g, b, a);
 }

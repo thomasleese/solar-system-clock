@@ -9,8 +9,9 @@ namespace solarsystemclock {
         Texture(SDL_Texture *texture, int width, int height);
         ~Texture();
 
-        void draw(SDL_Renderer *renderer, int x, int y, int width, int height, int r, int g, int b, int a);
-        void draw(SDL_Renderer *renderer, int x, int y, int r, int g, int b, int a);
+        void draw(SDL_Renderer *renderer, double x, double y, double width, double height, double angle, int r, int g, int b, int a);
+        void draw(SDL_Renderer *renderer, double x, double y, double width, double height, int r, int g, int b, int a);
+        void draw(SDL_Renderer *renderer, double x, double y, int r, int g, int b, int a);
 
     private:
         SDL_Texture *m_texture;

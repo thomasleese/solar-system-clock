@@ -24,7 +24,7 @@ void Sun::resize(int width, int height) {
     m_cy = height / 2;
 }
 
-void Sun::update(float dt) {
+void Sun::update(double dt) {
 
 }
 

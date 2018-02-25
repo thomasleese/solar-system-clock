@@ -55,17 +55,12 @@ Window::Window(int width, int height) {
         abort();
     }
 
-    int window_width, window_height;
-    SDL_GetWindowSize(m_window, &window_width, &window_height);
-
     int renderer_width, renderer_height;
     SDL_GetRendererOutputSize(m_renderer, &renderer_width, &renderer_height);
 
-    SDL_RenderSetScale(m_renderer, renderer_width / window_width, renderer_height / window_height);
-
     m_clock = new SolarSystemClock(m_renderer);
 
-    resize(width, height);
+    resize(renderer_width, renderer_height);
 }
 
 Window::~Window() {
@@ -96,7 +91,10 @@ void Window::mainloop() {
 
             case SDL_WINDOWEVENT:
                 if (event.window.event == SDL_WINDOWEVENT_RESIZED) {
-                    resize(event.window.data1, event.window.data2);
+                    int renderer_width, renderer_height;
+                    SDL_GetRendererOutputSize(m_renderer, &renderer_width, &renderer_height);
+
+                    resize(renderer_width, renderer_height);
                 }
                 break;
             }

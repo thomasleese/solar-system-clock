@@ -1,15 +1,22 @@
 #include <cstdlib>
+#include <cmath>
 #include <iostream>
 
 #include <SDL2/SDL.h>
 
 #include "solar-system-clock/texture.h"
+#include "solar-system-clock/layers/orbitrings.h"
 
 #include "solar-system-clock/layers/starfield.h"
 
 using namespace solarsystemclock::layers;
 
-Starfield::Starfield(SDL_Renderer *renderer) : Layer(renderer), m_stars(nullptr) {
+void Star::update_position() {
+    x = cx + std::sin(angle) * radius;
+    y = cy + std::cos(angle) * radius;
+}
+
+Starfield::Starfield(SDL_Renderer *renderer, layers::OrbitRingss *orbit_rings) : Layer(renderer), m_orbit_rings(orbit_rings), m_stars(nullptr) {
     m_star_texture = new Texture(renderer, "images/star.png");
 }
 
@@ -17,10 +24,37 @@ Starfield::~Starfield() {
     delete[] m_stars;
 }
 
+void Starfield::rotate_stars(int orbit, double amount) {
+    for (int i = 0; i < m_no_stars; i++) {
+        auto &star = m_stars[i];
+
+        if (star.orbit == orbit) {
+            star.angle += amount;
+            star.update_position();
+        }
+    }
+}
+
 void Starfield::resize(int width, int height) {
     if (m_stars != nullptr) {
         delete[] m_stars;
     }
+
+    int orbits[] = {
+        m_orbit_rings->radius(0),
+        m_orbit_rings->radius(1),
+        m_orbit_rings->radius(2),
+        m_orbit_rings->radius(3),
+        m_orbit_rings->radius(4),
+        m_orbit_rings->radius(5),
+        m_orbit_rings->radius(6),
+        m_orbit_rings->radius(7),
+    };
+
+    int hw = width / 2;
+    int hh = height / 2;
+
+    int max_radius = std::sqrt(hw * hw + hh * hh);
 
     m_no_stars = (width * height) / 160;
     m_stars = new Star[m_no_stars];
@@ -28,23 +62,39 @@ void Starfield::resize(int width, int height) {
     for (int i = 0; i < m_no_stars; i++) {
         int size = 1;
 
-        if (rand() % 10 == 0) {
+        if (rand() % 20 == 0) {
+            size = 4;
+        } else if (rand() % 10 == 0) {
             size = 3;
         } else if (rand() % 6 == 0) {
             size = 2;
         }
 
         m_stars[i].size = size;
-        m_stars[i].x = rand() % (width + size * 2);
-        m_stars[i].y = rand() % (height + size * 2);
+
+        m_stars[i].cx = width / 2;
+        m_stars[i].cy = height / 2;
+        int radius = m_stars[i].radius = rand() % max_radius;
+        m_stars[i].angle = (rand() % 1440) * 0.25 * M_PI / 180.0;
+
+        m_stars[i].orbit = 8;
+
+        for (int orbit = 7; orbit >= 0; orbit--) {
+            if (radius <= orbits[orbit] + 1) {
+                m_stars[i].orbit = orbit;
+            }
+        }
+
         m_stars[i].r = 255;
         m_stars[i].g = 255;
         m_stars[i].b = 255;
         m_stars[i].a = 255;
+
+        m_stars[i].update_position();
     }
 }
 
-void Starfield::update(float dt) {
+void Starfield::update(double dt) {
     int chance_rand = 3000 * dt;
 
     for (int i = 0; i < m_no_stars; i++) {
@@ -54,12 +104,15 @@ void Starfield::update(float dt) {
             star.a = 150 + rand() % 106;
         }
     }
+
+    for (int orbit = 0; orbit <= 7; orbit++) {
+        rotate_stars(orbit, -dt * (orbit + 1) * 0.1);
+    }
+
+    rotate_stars(8, -dt * 0.02);
 }
 
 void Starfield::draw() {
-    SDL_SetRenderDrawColor(m_renderer, 10, 60, 130, 255);
-    SDL_RenderClear(m_renderer);
-
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];
 

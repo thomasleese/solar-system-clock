@@ -10,13 +10,15 @@ namespace solarsystemclock::sprites {
 
 namespace solarsystemclock::layers {
 
+    class OrbitRingss;
+
     class Planets : public Layer {
     public:
-        Planets(SDL_Renderer *renderer, layers::OrbitRingss *orbit_rings);
+        Planets(SDL_Renderer *renderer, OrbitRingss *orbit_rings);
         ~Planets();
 
         void resize(int width, int height) override;
-        void update(float dt) override;
+        void update(double dt) override;
         void draw() override;
 
     private:

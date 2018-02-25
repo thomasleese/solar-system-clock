@@ -16,7 +16,7 @@ void Layer::resize(int width, int height) {
 
 }
 
-void Layer::update(float dt) {
+void Layer::update(double dt) {
     
 }
 

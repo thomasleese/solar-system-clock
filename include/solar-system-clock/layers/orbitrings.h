@@ -13,7 +13,7 @@ namespace solarsystemclock::layers {
         OrbitRingss(SDL_Renderer *renderer);
         ~OrbitRingss();
 
-        float gap() const;
+        double gap() const;
         int radius(int orbit) const;
 
         void resize(int width, int height) override;
