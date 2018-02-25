@@ -12,7 +12,7 @@
    width="1024"
    height="1024"
    viewBox="0 0 1024 1024"
-   version="1.1"
+   version="2"
    id="svg8"
    sodipodi:docname="orbits.svg"
    inkscape:export-filename="/Users/thomasleese/Documents/Projects/solar-system-clock/images/orbits.png"
@@ -24,34 +24,100 @@
     <filter
        style="color-interpolation-filters:sRGB;"
        inkscape:label="Drop Shadow"
-       id="filter7189">
+       id="filter1244">
       <feFlood
          flood-opacity="1"
-         flood-color="rgb(200,200,200)"
+         flood-color="rgb(255,255,255)"
          result="flood"
-         id="feFlood7179" />
+         id="feFlood1234" />
       <feComposite
          in="flood"
          in2="SourceGraphic"
          operator="out"
          result="composite1"
-         id="feComposite7181" />
+         id="feComposite1236" />
       <feGaussianBlur
          in="composite1"
-         stdDeviation="1.5"
+         stdDeviation="1"
          result="blur"
-         id="feGaussianBlur7183" />
+         id="feGaussianBlur1238" />
       <feOffset
-         dx="-1"
-         dy="-1"
+         dx="0"
+         dy="0"
          result="offset"
-         id="feOffset7185" />
+         id="feOffset1240" />
       <feComposite
          in="offset"
          in2="SourceGraphic"
          operator="atop"
-         result="composite2"
-         id="feComposite7187" />
+         result="fbSourceGraphic"
+         id="feComposite1242" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1525" />
+      <feFlood
+         id="feFlood1527"
+         flood-opacity="0.5"
+         flood-color="rgb(255,255,255)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite1529"
+         in="flood"
+         operator="out"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur1531"
+         in="composite1"
+         stdDeviation="1"
+         result="blur" />
+      <feOffset
+         id="feOffset1533"
+         dx="0"
+         dy="0"
+         result="offset" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite1535"
+         in="offset"
+         operator="atop"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix1621" />
+      <feFlood
+         id="feFlood1623"
+         flood-opacity="0.8"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite1625"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur1627"
+         in="composite1"
+         stdDeviation="12"
+         result="blur" />
+      <feOffset
+         id="feOffset1629"
+         dx="0"
+         dy="0"
+         result="offset" />
+      <feComposite
+         in2="offset"
+         id="feComposite1631"
+         in="fbSourceGraphic"
+         operator="over"
+         result="composite2" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -61,9 +127,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.49497475"
-     inkscape:cx="511.13375"
-     inkscape:cy="512.25388"
+     inkscape:zoom="0.3535534"
+     inkscape:cx="549.94464"
+     inkscape:cy="389.7311"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -72,7 +138,8 @@
      inkscape:window-height="755"
      inkscape:window-x="0"
      inkscape:window-y="569"
-     inkscape:window-maximized="0" />
+     inkscape:window-maximized="0"
+     showguides="false" />
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -88,54 +155,55 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     transform="translate(512,512)">
     <circle
-       r="500"
-       cy="512"
-       cx="512"
-       id="circle5905"
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)" />
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)"
+       id="circle7203"
+       cx="0"
+       cy="0"
+       r="100" />
     <circle
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)"
-       id="circle7191"
-       cx="512"
-       cy="512"
-       r="440" />
+       r="155"
+       cy="0"
+       cx="0"
+       id="circle1379"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)" />
     <circle
-       r="380"
-       cy="512"
-       cx="512"
-       id="circle7193"
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)" />
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)"
+       id="circle1381"
+       cx="0"
+       cy="0"
+       r="210" />
     <circle
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)"
-       id="circle7195"
-       cx="512"
-       cy="512"
+       r="265"
+       cy="0"
+       cx="0"
+       id="circle1383"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)" />
+    <circle
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)"
+       id="circle1385"
+       cx="0"
+       cy="0"
        r="320" />
     <circle
-       r="260"
-       cy="512"
-       cx="512"
-       id="circle7197"
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)" />
+       r="375"
+       cy="0"
+       cx="0"
+       id="circle1387"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)" />
     <circle
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)"
-       id="circle7199"
-       cx="512"
-       cy="512"
-       r="200" />
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)"
+       id="circle1389"
+       cx="0"
+       cy="0"
+       r="430" />
     <circle
-       r="140"
-       cy="512"
-       cx="512"
-       id="circle7201"
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)" />
-    <circle
-       style="fill:none;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter7189)"
-       id="circle7203"
-       cx="512"
-       cy="512"
-       r="80" />
+       r="485"
+       cy="0"
+       cx="0"
+       id="circle1391"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-opacity:1;filter:url(#filter1244)" />
   </g>
 </svg>

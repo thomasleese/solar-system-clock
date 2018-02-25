@@ -8,6 +8,7 @@ namespace solarsystemclock {
 
     class Starfield;
     class Orbits;
+    class Sun;
 
     class Window {
     public:
@@ -23,6 +24,7 @@ namespace solarsystemclock {
 
         Starfield *m_starfield;
         Orbits *m_orbits;
+        Sun *m_sun;
     };
 
 }
