@@ -16,10 +16,6 @@ void Layer::resize(int width, int height) {
 
 }
 
-void Layer::update(double dt) {
-    
-}
-
 void Layer::draw() {
 
 }

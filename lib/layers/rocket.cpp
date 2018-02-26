@@ -12,7 +12,7 @@
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Rocket::Rocket(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock), m_angle(0) {
+Rocket::Rocket(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
     m_texture = new Texture(renderer, "images/rocket.png");
 }
 
@@ -28,12 +28,8 @@ void Rocket::resize(int width, int height) {
     m_cy = height / 2;
 }
 
-void Rocket::update(double dt) {
-    m_angle = m_clock->seconds_angle();
-}
-
 void Rocket::draw() {
-    double radians = M_PI - m_angle;
+    double radians = M_PI - m_clock->seconds_angle();
 
     int x = m_cx + std::sin(radians) * m_radius;
     int y = m_cy + std::cos(radians) * m_radius;

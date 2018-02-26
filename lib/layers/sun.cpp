@@ -19,13 +19,8 @@ Sun::~Sun() {
 
 void Sun::resize(int width, int height) {
     m_size = std::min(width, height) * 0.08;
-
     m_cx = width / 2;
     m_cy = height / 2;
-}
-
-void Sun::update(double dt) {
-
 }
 
 void Sun::draw() {

@@ -15,7 +15,6 @@ namespace solarsystemclock::layers {
         ~Rocket();
 
         void resize(int width, int height) override;
-        void update(double dt) override;
         void draw() override;
 
     private:
@@ -23,7 +22,7 @@ namespace solarsystemclock::layers {
 
         Texture *m_texture;
 
-        double m_radius, m_angle;
+        double m_radius;
         int m_size, m_cx, m_cy;
     };
 

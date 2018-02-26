@@ -95,8 +95,8 @@ void Starfield::resize(int width, int height) {
     }
 }
 
-void Starfield::update(double dt) {
-    int chance_rand = 3000 * dt;
+void Starfield::draw() {
+    int chance_rand = 100;
 
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];
@@ -114,9 +114,7 @@ void Starfield::update(double dt) {
     }
 
     set_rotation(8, m_clock->planet(7)->angle() * 1.1);
-}
 
-void Starfield::draw() {
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];
 

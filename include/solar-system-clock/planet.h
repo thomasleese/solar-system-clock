@@ -27,7 +27,7 @@ namespace solarsystemclock {
         }
 
         void resize(Clock *clock);
-        void update(double dt);
+        void update(long ms);
 
     private:
         int m_orbit, m_diameter, m_red, m_green, m_blue;

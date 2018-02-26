@@ -28,16 +28,10 @@ void ClockHands::resize(int width, int height) {
     m_cy = height / 2;
 }
 
-void ClockHands::update(double dt) {
-    m_hour_angle = m_clock->hours_angle();
-    m_minute_angle = m_clock->minutes_angle();
-    m_second_angle = m_clock->seconds_angle();
-}
-
 void ClockHands::draw() {
-    draw_hand(m_hour_radius, m_hour_angle);
-    draw_hand(m_minute_radius, m_minute_angle);
-    draw_hand(m_second_radius, m_second_angle);
+    draw_hand(m_hour_radius, m_clock->hours_angle());
+    draw_hand(m_minute_radius, m_clock->minutes_angle());
+    draw_hand(m_second_radius, m_clock->seconds_angle());
 }
 
 void ClockHands::draw_hand(double radius, double angle) {

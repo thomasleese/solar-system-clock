@@ -12,7 +12,7 @@ namespace solarsystemclock {
         ~Clock();
 
         void resize(int width, int height);
-        void update(double dt);
+        void update();
 
         double size() const;
 
@@ -41,6 +41,8 @@ namespace solarsystemclock {
         int m_size;
         SunSet *m_sun;
         std::vector<Planet *> m_planets;
+
+        long m_start_ms;
     };
 
 }

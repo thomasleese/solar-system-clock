@@ -11,7 +11,7 @@
 
 using namespace solarsystemclock::layers;
 
-SunriseSunset::SunriseSunset(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock), m_sunset_angle(0), m_sunrise_angle(0) {
+SunriseSunset::SunriseSunset(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
     m_texture = new Texture(renderer, "images/shootingstar.png");
 }
 
@@ -27,18 +27,16 @@ void SunriseSunset::resize(int width, int height) {
     m_cy = height / 2;
 }
 
-void SunriseSunset::update(double dt) {
-    m_sunset_angle = m_clock->sunset_angle();
-    m_sunrise_angle = m_clock->sunrise_angle();
-}
-
 void SunriseSunset::draw() {
+    double sunset_angle = m_clock->sunset_angle();
+    double sunrise_angle = m_clock->sunrise_angle();
+
     double hours_angle = m_clock->hours_angle();
 
-    bool sunrise_happened = hours_angle < m_sunrise_angle;
+    bool sunrise_happened = hours_angle < sunrise_angle;
 
-    draw_shooting_star(m_sunrise_angle, !sunrise_happened);
-    draw_shooting_star(m_sunset_angle, sunrise_happened);
+    draw_shooting_star(sunrise_angle, !sunrise_happened);
+    draw_shooting_star(sunset_angle, sunrise_happened);
 }
 
 void SunriseSunset::draw_shooting_star(double angle, bool bright) {

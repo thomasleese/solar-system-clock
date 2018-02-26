@@ -24,6 +24,8 @@ Clock::Clock() : m_sun(new SunSet) {
     m_planets.push_back(new Planet(7, 49248, 0x15, 0x40, 0xff, 164.8, 159.62));
 
     m_sun->setPosition(51.5349920, 0.0066170, 0);
+
+    m_start_ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
 }
 
 Clock::~Clock() {
@@ -42,14 +44,17 @@ void Clock::resize(int width, int height) {
     }
 }
 
-void Clock::update(double dt) {
+void Clock::update() {
     auto t = std::time(nullptr);
     auto tm = std::localtime(&t);
 
     m_sun->setCurrentDate(tm->tm_year, tm->tm_mon + 1, tm->tm_mday);
 
+    long current_ms = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count();
+    long diff_ms = current_ms - m_start_ms;
+
     for (auto &planet : m_planets) {
-        planet->update(dt);
+        planet->update(diff_ms);
     }
 }
 

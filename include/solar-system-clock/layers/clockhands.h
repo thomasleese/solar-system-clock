@@ -15,7 +15,6 @@ namespace solarsystemclock::layers {
         ~ClockHands();
 
         void resize(int width, int height) override;
-        void update(double dt);
         void draw() override;
 
         void draw_hand(double radius, double angle);
@@ -24,9 +23,7 @@ namespace solarsystemclock::layers {
         Clock *m_clock;
         Texture *m_texture;
 
-        double m_hour_radius, m_hour_angle;
-        double m_minute_radius, m_minute_angle;
-        double m_second_radius, m_second_angle;
+        double m_hour_radius, m_minute_radius, m_second_radius;
 
         int m_cx, m_cy;
     };

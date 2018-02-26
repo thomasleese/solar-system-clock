@@ -75,12 +75,6 @@ void Window::resize(int width, int height) {
 }
 
 void Window::mainloop() {
-    int t = 0.0;
-    const int dt = (1.0 / 60.0) * 1000.0;
-
-    int current_time = SDL_GetTicks();
-    int accumulator = 0.0;
-
     SDL_Event event;
 
     while (true) {
@@ -100,25 +94,7 @@ void Window::mainloop() {
             }
 		}
 
-        /*int new_time = SDL_GetTicks();
-        int frame_time = new_time - current_time;
-        current_time = new_time;
-
-        accumulator += frame_time;
-
-        while (accumulator >= dt) {
-            double dt_seconds = dt / 1000.0;
-
-            m_clock->update(dt_seconds);
-
-            accumulator -= dt;
-            t += dt;
-        }*/
-
-        m_clock->update(0.05);
         m_clock->draw();
-
-        SDL_Delay(50);
 
 		SDL_RenderPresent(m_renderer);
 	}

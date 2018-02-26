@@ -43,15 +43,9 @@ void SolarSystemClock::resize(int width, int height) {
     }
 }
 
-void SolarSystemClock::update(double dt) {
-    m_clock->update(dt);
-
-    for (auto &layer : m_layers) {
-        layer->update(dt);
-    }
-}
-
 void SolarSystemClock::draw() {
+    m_clock->update();
+
     for (auto &layer : m_layers) {
         layer->draw();
     }

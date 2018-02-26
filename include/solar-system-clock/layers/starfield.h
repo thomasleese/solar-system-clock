@@ -31,7 +31,6 @@ namespace solarsystemclock::layers {
         void set_rotation(int orbit, double angle);
 
         void resize(int width, int height) override;
-        void update(double dt) override;
         void draw() override;
 
     private:

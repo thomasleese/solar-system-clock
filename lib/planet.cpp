@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <iostream>
 
 #include "solar-system-clock/clock.h"
 
@@ -37,6 +38,8 @@ void Planet::resize(Clock *clock) {
     m_size = ((max - min) / (largest - smallest)) * (static_cast<double>(m_diameter) - smallest) + min;
 }
 
-void Planet::update(double dt) {
-    m_angle -= 1.0 / m_orbital_period * dt * 0.1;
+void Planet::update(long ms) {
+    double proportion = static_cast<double>(ms) / 5000.0;
+
+    m_angle = m_orbit_at_2000 - (1.0 / m_orbital_period) * proportion;
 }
