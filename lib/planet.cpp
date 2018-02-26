@@ -38,5 +38,5 @@ void Planet::resize(Clock *clock) {
 }
 
 void Planet::update(double dt) {
-    m_angle += 1.0 / m_orbital_period * dt * 0.1;
+    m_angle -= 1.0 / m_orbital_period * dt * 0.1;
 }

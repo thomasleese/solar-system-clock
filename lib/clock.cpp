@@ -49,6 +49,14 @@ double Clock::seconds_angle() const {
     return (seconds / 60.0) * M_PI * 2.0;
 }
 
+double Clock::sunrise_angle() const {
+    return 0.5f;
+}
+
+double Clock::sunset_angle() const {
+    return 1.5f;
+}
+
 double Clock::orbits_size() const {
     return m_size * 0.8;
 }
