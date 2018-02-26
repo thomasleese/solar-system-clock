@@ -4,6 +4,8 @@ project(SolarSystemClock)
 
 find_package(PkgConfig REQUIRED)
 
+add_subdirectory(cmake/sunset)
+
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
