@@ -8,6 +8,7 @@
 #include "solar-system-clock/layers/planets.h"
 #include "solar-system-clock/layers/rocket.h"
 #include "solar-system-clock/layers/sunrisesunset.h"
+#include "solar-system-clock/layers/clockhands.h"
 
 #include "solar-system-clock/layers/solarsystemclock.h"
 
@@ -19,10 +20,11 @@ SolarSystemClock::SolarSystemClock(SDL_Renderer *renderer) : Layer(renderer) {
     m_layers.push_back(new Background(renderer));
     m_layers.push_back(new Starfield(renderer, m_clock));
     m_layers.push_back(new OrbitRings(renderer, m_clock));
-    m_layers.push_back(new Sun(renderer));
     m_layers.push_back(new Planets(renderer, m_clock));
     m_layers.push_back(new Rocket(renderer, m_clock));
     m_layers.push_back(new SunriseSunset(renderer, m_clock));
+    m_layers.push_back(new ClockHands(renderer, m_clock));
+    m_layers.push_back(new Sun(renderer));
 }
 
 SolarSystemClock::~SolarSystemClock() {
