@@ -2,13 +2,15 @@
 #include <chrono>
 #include <cmath>
 
+#include <sunset/sunset.h>
+
 #include "solar-system-clock/planet.h"
 
 #include "solar-system-clock/clock.h"
 
 using namespace solarsystemclock;
 
-Clock::Clock() {
+Clock::Clock() : m_sun(new SunSet) {
     m_planets.push_back(new Planet(0, 4780, 0x80, 0x80, 0x80, 0.240846, 208.03));
     m_planets.push_back(new Planet(1, 12104, 0xff, 0x90, 0x00, 0.615198, 278.75));
     m_planets.push_back(new Planet(2, 12756, 0x00, 0xc0, 0x50, 1.0, 0.0));
@@ -17,9 +19,13 @@ Clock::Clock() {
     m_planets.push_back(new Planet(5, 116464, 0xef, 0xb0, 0x20, 29.46, 54.66));
     m_planets.push_back(new Planet(6, 50724, 0x00, 0xb0, 0xc0, 84.01, 149.55));
     m_planets.push_back(new Planet(7, 49248, 0x15, 0x40, 0xff, 164.8, 159.62));
+
+    m_sun->setPosition(51.5349920, 0.0066170, 0);
 }
 
 Clock::~Clock() {
+    delete m_sun;
+
     for (auto &planet : m_planets) {
         delete planet;
     }
@@ -34,6 +40,11 @@ void Clock::resize(int width, int height) {
 }
 
 void Clock::update(double dt) {
+    auto t = std::time(nullptr);
+    auto tm = std::localtime(&t);
+
+    m_sun->setCurrentDate(tm->tm_year, tm->tm_mon + 1, tm->tm_mday);
+
     for (auto &planet : m_planets) {
         planet->update(dt);
     }
@@ -44,17 +55,50 @@ double Clock::size() const {
 }
 
 double Clock::seconds_angle() const {
-    std::time_t t = std::time(nullptr);
-    int seconds = std::localtime(&t)->tm_sec;
-    return (seconds / 60.0) * M_PI * 2.0;
+    auto t = std::time(nullptr);
+    auto tm = std::localtime(&t);
+
+    double seconds = tm->tm_sec;
+    double proportion = seconds / 60.0;
+
+    return proportion * M_PI * 2.0;
+}
+
+double Clock::minutes_angle() const {
+    auto t = std::time(nullptr);
+    auto tm = std::localtime(&t);
+
+    double minutes = tm->tm_min + (tm->tm_sec / 60.0);
+    double proportion = minutes / 60.0;
+
+    return proportion * M_PI * 2.0;
+}
+
+double Clock::hours_angle() const {
+    auto t = std::time(nullptr);
+    auto tm = std::localtime(&t);
+
+    int hour = tm->tm_hour;
+    if (hour > 12) {
+        hour -= 12;
+    }
+
+    double hours = static_cast<double>(hour) + (tm->tm_min / 60.0) + (tm->tm_sec / 60.0 / 60.0);
+    double proportion = hours / 12.0;
+
+    return proportion * M_PI * 2.0;
 }
 
 double Clock::sunrise_angle() const {
-    return 0.5f;
+    double sunrise = m_sun->calcSunrise();
+    auto proportion = sunrise / (12.0 * 60.0);
+    return proportion * M_PI * 2.0;
 }
 
 double Clock::sunset_angle() const {
-    return 1.5f;
+    double sunset = m_sun->calcSunset();
+    auto proportion = sunset / (12.0 * 60.0);
+    return proportion * M_PI * 2.0;
 }
 
 double Clock::orbits_size() const {

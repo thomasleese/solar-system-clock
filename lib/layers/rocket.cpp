@@ -29,7 +29,7 @@ void Rocket::resize(int width, int height) {
 }
 
 void Rocket::update(double dt) {
-    m_angle = m_clock->seconds_angle();
+    m_angle = m_clock->hours_angle();
 }
 
 void Rocket::draw() {

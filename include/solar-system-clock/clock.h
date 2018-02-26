@@ -1,5 +1,7 @@
 #include <vector>
 
+class SunSet;
+
 namespace solarsystemclock {
 
     class Planet;
@@ -15,6 +17,8 @@ namespace solarsystemclock {
         double size() const;
 
         double seconds_angle() const;
+        double minutes_angle() const;
+        double hours_angle() const;
 
         double sunrise_angle() const;
         double sunset_angle() const;
@@ -35,6 +39,7 @@ namespace solarsystemclock {
 
     private:
         int m_size;
+        SunSet *m_sun;
         std::vector<Planet *> m_planets;
     };
 

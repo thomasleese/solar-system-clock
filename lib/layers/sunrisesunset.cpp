@@ -33,11 +33,15 @@ void SunriseSunset::update(double dt) {
 }
 
 void SunriseSunset::draw() {
-    draw_shooting_star(m_sunset_angle);
-    draw_shooting_star(m_sunrise_angle);
+    double hours_angle = m_clock->hours_angle();
+
+    bool sunrise_happened = hours_angle < m_sunrise_angle;
+
+    draw_shooting_star(m_sunrise_angle, !sunrise_happened);
+    draw_shooting_star(m_sunset_angle, sunrise_happened);
 }
 
-void SunriseSunset::draw_shooting_star(double angle) {
+void SunriseSunset::draw_shooting_star(double angle, bool bright) {
     double radians = M_PI - angle;
 
     int x = m_cx + std::sin(radians) * m_radius;
@@ -45,5 +49,5 @@ void SunriseSunset::draw_shooting_star(double angle) {
 
     double degrees = 270.0 - radians * 180.0 / M_PI;
 
-    m_texture->draw(m_renderer, x, y, m_size, m_size, degrees, 255, 255, 255, 255);
+    m_texture->draw(m_renderer, x, y, m_size, m_size, degrees, 255, 255, 255, bright ? 255 : 150);
 }

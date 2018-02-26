@@ -18,7 +18,7 @@ namespace solarsystemclock::layers {
         void update(double dt) override;
         void draw() override;
 
-        void draw_shooting_star(double angle);
+        void draw_shooting_star(double angle, bool bright);
 
     private:
         Clock *m_clock;
