@@ -1,6 +1,9 @@
 #include <algorithm>
 #include <chrono>
+#include <ctime>
 #include <cmath>
+#include <iostream>
+#include <sys/time.h>
 
 #include <sunset/sunset.h>
 
@@ -55,10 +58,13 @@ double Clock::size() const {
 }
 
 double Clock::seconds_angle() const {
+    timeval tv;
+    gettimeofday(&tv, NULL);
+
     auto t = std::time(nullptr);
     auto tm = std::localtime(&t);
 
-    double seconds = tm->tm_sec;
+    double seconds = tm->tm_sec + (tv.tv_usec / 1000.0 / 1000.0);
     double proportion = seconds / 60.0;
 
     return proportion * M_PI * 2.0;

@@ -63,9 +63,7 @@ void Starfield::resize(int width, int height) {
     for (int i = 0; i < m_no_stars; i++) {
         int size = 1;
 
-        if (rand() % 20 == 0) {
-            size = 4;
-        } else if (rand() % 10 == 0) {
+        if (rand() % 10 == 0) {
             size = 3;
         } else if (rand() % 6 == 0) {
             size = 2;

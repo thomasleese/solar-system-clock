@@ -100,7 +100,7 @@ void Window::mainloop() {
             }
 		}
 
-        int new_time = SDL_GetTicks();
+        /*int new_time = SDL_GetTicks();
         int frame_time = new_time - current_time;
         current_time = new_time;
 
@@ -113,9 +113,12 @@ void Window::mainloop() {
 
             accumulator -= dt;
             t += dt;
-        }
+        }*/
 
+        m_clock->update(0.05);
         m_clock->draw();
+
+        SDL_Delay(50);
 
 		SDL_RenderPresent(m_renderer);
 	}
