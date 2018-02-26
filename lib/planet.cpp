@@ -39,7 +39,7 @@ void Planet::resize(Clock *clock) {
 }
 
 void Planet::update(long ms) {
-    double proportion = static_cast<double>(ms) / 5000.0;
+    double proportion = static_cast<double>(ms) / 1500.0;
 
     m_angle = m_orbit_at_2000 - (1.0 / m_orbital_period) * proportion;
 }
