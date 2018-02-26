@@ -14,17 +14,15 @@
 
 using namespace solarsystemclock::layers;
 
-SolarSystemClock::SolarSystemClock(SDL_Renderer *renderer) : Layer(renderer) {
-    m_clock = new Clock;
-
-    m_layers.push_back(new Background(renderer));
+SolarSystemClock::SolarSystemClock(SDL_Renderer *renderer) : Layer(renderer, new Clock) {
+    m_layers.push_back(new Background(renderer, m_clock));
     m_layers.push_back(new Starfield(renderer, m_clock));
     m_layers.push_back(new OrbitRings(renderer, m_clock));
     m_layers.push_back(new Planets(renderer, m_clock));
     m_layers.push_back(new Rocket(renderer, m_clock));
     m_layers.push_back(new SunriseSunset(renderer, m_clock));
     m_layers.push_back(new ClockHands(renderer, m_clock));
-    m_layers.push_back(new Sun(renderer));
+    m_layers.push_back(new Sun(renderer, m_clock));
 }
 
 SolarSystemClock::~SolarSystemClock() {

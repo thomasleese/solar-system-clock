@@ -17,7 +17,7 @@ void Star::update_position() {
     y = cy + std::cos(angle) * radius;
 }
 
-Starfield::Starfield(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock), m_stars(nullptr) {
+Starfield::Starfield(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock), m_stars(nullptr) {
     m_star_texture = new Texture(renderer, "images/star.png");
 }
 

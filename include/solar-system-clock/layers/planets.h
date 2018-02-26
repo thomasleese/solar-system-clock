@@ -20,8 +20,6 @@ namespace solarsystemclock::layers {
         void draw() override;
 
     private:
-        Clock *m_clock;
-
         double m_cx, m_cy;
 
         Texture *m_bg_texture, *m_ball_texture, *m_shadow_texture;

@@ -13,7 +13,7 @@
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Planets::Planets(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
+Planets::Planets(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
     m_bg_texture = new Texture(renderer, "images/planet-background.png");
     m_ball_texture = new Texture(renderer, "images/planet-ball.png");
     m_shadow_texture = new Texture(renderer, "images/planet-shadow.png");

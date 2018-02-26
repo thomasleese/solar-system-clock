@@ -9,7 +9,7 @@
 
 using namespace solarsystemclock::layers;
 
-Sun::Sun(SDL_Renderer *renderer) : Layer(renderer) {
+Sun::Sun(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
     m_texture = new Texture(renderer, "images/sun.png");
 }
 

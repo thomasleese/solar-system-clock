@@ -20,8 +20,6 @@ namespace solarsystemclock::layers {
         void draw_shooting_star(double angle, bool bright);
 
     private:
-        Clock *m_clock;
-
         Texture *m_texture;
 
         double m_radius;

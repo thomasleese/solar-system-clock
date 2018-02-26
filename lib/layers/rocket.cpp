@@ -12,7 +12,7 @@
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Rocket::Rocket(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
+Rocket::Rocket(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
     m_texture = new Texture(renderer, "images/rocket.png");
 }
 

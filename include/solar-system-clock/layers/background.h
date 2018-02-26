@@ -10,7 +10,7 @@ namespace solarsystemclock::layers {
 
     class Background : public Layer {
     public:
-        Background(SDL_Renderer *renderer);
+        Background(SDL_Renderer *renderer, Clock *clock);
         ~Background();
 
         void resize(int width, int height) override;

@@ -19,7 +19,6 @@ namespace solarsystemclock::layers {
         void draw() override;
 
     private:
-        Clock *m_clock;
         std::vector<Layer *> m_layers;
     };
 

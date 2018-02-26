@@ -11,7 +11,7 @@
 
 using namespace solarsystemclock::layers;
 
-ClockHands::ClockHands(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
+ClockHands::ClockHands(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
     m_texture = new Texture(renderer, "images/hand.png");
 }
 

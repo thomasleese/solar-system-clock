@@ -11,7 +11,7 @@
 
 using namespace solarsystemclock::layers;
 
-SunriseSunset::SunriseSunset(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock) {
+SunriseSunset::SunriseSunset(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
     m_texture = new Texture(renderer, "images/shootingstar.png");
 }
 

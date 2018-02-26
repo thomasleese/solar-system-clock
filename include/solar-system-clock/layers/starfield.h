@@ -34,8 +34,6 @@ namespace solarsystemclock::layers {
         void draw() override;
 
     private:
-        Clock *m_clock;
-
         Texture *m_star_texture;
 
         Star *m_stars;
