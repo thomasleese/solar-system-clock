@@ -9,6 +9,7 @@
 
 #include "solar-system-clock/layers/rocket.h"
 
+using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
 Rocket::Rocket(SDL_Renderer *renderer, Clock *clock) : Layer(renderer), m_clock(clock), m_angle(0) {
