@@ -1,4 +1,4 @@
-#include "solar-system-clock/window.h"
+#include "solarsystemclock/window.h"
 
 using namespace solarsystemclock;
 

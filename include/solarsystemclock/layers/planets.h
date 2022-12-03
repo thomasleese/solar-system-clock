@@ -1,6 +1,6 @@
 #include <vector>
 
-#include "solar-system-clock/layers/layer.h"
+#include "solarsystemclock/layers/layer.h"
 
 struct SDL_Renderer;
 

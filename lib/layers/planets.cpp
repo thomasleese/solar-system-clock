@@ -4,11 +4,11 @@
 
 #include <SDL2/SDL.h>
 
-#include "solar-system-clock/clock.h"
-#include "solar-system-clock/planet.h"
-#include "solar-system-clock/texture.h"
+#include "solarsystemclock/clock.h"
+#include "solarsystemclock/planet.h"
+#include "solarsystemclock/texture.h"
 
-#include "solar-system-clock/layers/planets.h"
+#include "solarsystemclock/layers/planets.h"
 
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;

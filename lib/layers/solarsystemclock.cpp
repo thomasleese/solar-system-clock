@@ -1,16 +1,16 @@
 #include <SDL2/SDL.h>
 
-#include "solar-system-clock/clock.h"
-#include "solar-system-clock/layers/background.h"
-#include "solar-system-clock/layers/starfield.h"
-#include "solar-system-clock/layers/orbitrings.h"
-#include "solar-system-clock/layers/sun.h"
-#include "solar-system-clock/layers/planets.h"
-#include "solar-system-clock/layers/rocket.h"
-#include "solar-system-clock/layers/sunrisesunset.h"
-#include "solar-system-clock/layers/clockhands.h"
+#include "solarsystemclock/clock.h"
+#include "solarsystemclock/layers/background.h"
+#include "solarsystemclock/layers/starfield.h"
+#include "solarsystemclock/layers/orbitrings.h"
+#include "solarsystemclock/layers/sun.h"
+#include "solarsystemclock/layers/planets.h"
+#include "solarsystemclock/layers/rocket.h"
+#include "solarsystemclock/layers/sunrisesunset.h"
+#include "solarsystemclock/layers/clockhands.h"
 
-#include "solar-system-clock/layers/solarsystemclock.h"
+#include "solarsystemclock/layers/solarsystemclock.h"
 
 using namespace solarsystemclock::layers;
 
