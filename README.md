@@ -1,5 +1,5 @@
 # Solar System Clock
 
-Solar System Clock inspired by Van Cleef &amp; Arpels’ Midnight Planétarium Watch.
+> A clock inspired by Van Cleef & Arpels Midnight Planétarium watch.
 
 ![Screenshot of the clock](screenshot.png)
