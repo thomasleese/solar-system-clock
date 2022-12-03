@@ -3,9 +3,9 @@
 
 #include <SDL2/SDL.h>
 
-#include "solar-system-clock/texture.h"
+#include "solarsystemclock/texture.h"
 
-#include "solar-system-clock/layers/sun.h"
+#include "solarsystemclock/layers/sun.h"
 
 using namespace solarsystemclock::layers;
 

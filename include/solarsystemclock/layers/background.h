@@ -1,29 +1,23 @@
-#include "solar-system-clock/layers/layer.h"
+#include "solarsystemclock/layers/layer.h"
 
 struct SDL_Renderer;
 
 namespace solarsystemclock {
-    class Clock;
     class Texture;
 }
 
 namespace solarsystemclock::layers {
 
-    class SunriseSunset : public Layer {
+    class Background : public Layer {
     public:
-        SunriseSunset(SDL_Renderer *renderer, Clock *clock);
-        ~SunriseSunset();
+        Background(SDL_Renderer *renderer, Clock *clock);
+        ~Background();
 
         void resize(int width, int height) override;
         void draw() override;
 
-        void draw_shooting_star(double angle, bool bright);
-
     private:
         Texture *m_texture;
-
-        double m_radius;
-
         int m_size, m_cx, m_cy;
     };
 

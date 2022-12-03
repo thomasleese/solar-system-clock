@@ -3,7 +3,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "solar-system-clock/texture.h"
+#include "solarsystemclock/texture.h"
 
 using namespace solarsystemclock;
 

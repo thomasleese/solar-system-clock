@@ -7,9 +7,9 @@
 
 #include <sunset/sunset.h>
 
-#include "solar-system-clock/planet.h"
+#include "solarsystemclock/planet.h"
 
-#include "solar-system-clock/clock.h"
+#include "solarsystemclock/clock.h"
 
 using namespace solarsystemclock;
 

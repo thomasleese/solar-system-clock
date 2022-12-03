@@ -3,9 +3,9 @@
 #include <cmath>
 #include <iostream>
 
-#include "solar-system-clock/clock.h"
+#include "solarsystemclock/clock.h"
 
-#include "solar-system-clock/planet.h"
+#include "solarsystemclock/planet.h"
 
 using namespace std::chrono;
 

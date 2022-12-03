@@ -4,9 +4,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "solar-system-clock/layers/solarsystemclock.h"
+#include "solarsystemclock/layers/solarsystemclock.h"
 
-#include "solar-system-clock/window.h"
+#include "solarsystemclock/window.h"
 
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;

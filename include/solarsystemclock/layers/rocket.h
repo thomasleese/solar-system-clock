@@ -1,4 +1,4 @@
-#include "solar-system-clock/layers/layer.h"
+#include "solarsystemclock/layers/layer.h"
 
 struct SDL_Renderer;
 
@@ -9,10 +9,10 @@ namespace solarsystemclock {
 
 namespace solarsystemclock::layers {
 
-    class OrbitRings : public Layer {
+    class Rocket : public Layer {
     public:
-        OrbitRings(SDL_Renderer *renderer, Clock *clock);
-        ~OrbitRings();
+        Rocket(SDL_Renderer *renderer, Clock *clock);
+        ~Rocket();
 
         void resize(int width, int height) override;
         void draw() override;
@@ -20,6 +20,7 @@ namespace solarsystemclock::layers {
     private:
         Texture *m_texture;
 
+        double m_radius;
         int m_size, m_cx, m_cy;
     };
 
