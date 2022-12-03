@@ -1,2 +1,2 @@
 add_executable(solarsystemclock main.cpp)
-target_link_libraries(solarsystemclock solarsystemclock_lib sunset)
+target_link_libraries(solarsystemclock solarsystemclock_lib)
