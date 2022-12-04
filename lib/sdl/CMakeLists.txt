@@ -1,6 +1,3 @@
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(SDL2 REQUIRED sdl2 sdl2_image sdl2_mixer sdl2_ttf)
-
 add_library(solarsystemclock_sdl
   error.cpp
   font.cpp
