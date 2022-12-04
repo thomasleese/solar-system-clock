@@ -46,7 +46,5 @@ void ClockHands::draw_hand(float radius, double angle) {
             height
     };
 
-    SDL_FPoint center = {m_cx, m_cy};
-
-    m_renderer.render_copy(m_texture, nullptr, &dst_rect, degrees, &center, SDL_FLIP_NONE);
+    m_renderer.render_copy(m_texture, nullptr, &dst_rect, degrees, nullptr, SDL_FLIP_NONE);
 }

@@ -37,8 +37,6 @@ void Planets::draw() {
         m_shadow_texture.set_color_mod(planet->red(), planet->green(), planet->blue());
         m_bg_texture.set_color_mod(planet->red(), planet->green(), planet->blue());
 
-        SDL_FPoint center = {m_cx, m_cy};
-
         SDL_FRect shadow_dst_rect = {
                 static_cast<float>(x - planet->size()),
                 static_cast<float>(y - (planet->size() * 6.25f)),
@@ -46,7 +44,7 @@ void Planets::draw() {
                 static_cast<float>(planet->size() * 12.5f)
         };
 
-        m_renderer.render_copy(m_shadow_texture, nullptr, &shadow_dst_rect, degrees, &center, SDL_FLIP_NONE);
+        m_renderer.render_copy(m_shadow_texture, nullptr, &shadow_dst_rect, degrees, nullptr, SDL_FLIP_NONE);
 
         SDL_FRect fg_dst_rect = {
                 static_cast<float>(x - (planet->size() / 2.f)),
@@ -55,7 +53,7 @@ void Planets::draw() {
                 static_cast<float>(planet->size())
         };
 
-        m_renderer.render_copy(m_bg_texture, nullptr, &fg_dst_rect, degrees, &center, SDL_FLIP_NONE);
-        m_renderer.render_copy(m_ball_texture, nullptr, &fg_dst_rect, degrees, &center, SDL_FLIP_NONE);
+        m_renderer.render_copy(m_bg_texture, nullptr, &fg_dst_rect, degrees, nullptr, SDL_FLIP_NONE);
+        m_renderer.render_copy(m_ball_texture, nullptr, &fg_dst_rect, degrees, nullptr, SDL_FLIP_NONE);
     }
 }

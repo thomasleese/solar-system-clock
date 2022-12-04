@@ -50,7 +50,5 @@ void SunriseSunset::draw_shooting_star(double angle, bool bright) {
             m_size
     };
 
-    SDL_FPoint center = {x, y};
-
-    m_renderer.render_copy(m_texture, nullptr, &dst_rect, degrees, &center, SDL_FLIP_NONE);
+    m_renderer.render_copy(m_texture, nullptr, &dst_rect, degrees, nullptr, SDL_FLIP_NONE);
 }
