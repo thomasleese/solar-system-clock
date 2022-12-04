@@ -8,6 +8,7 @@ namespace solarsystemclock::sdl {
     class Init {
     public:
         Init();
+
         ~Init();
     };
 

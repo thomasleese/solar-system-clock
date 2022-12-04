@@ -1,25 +1,31 @@
-#pragma once
-
-struct SDL_Renderer;
+#ifndef SOLARSYSTEMCLOCK_LAYERS_LAYER_H
+#define SOLARSYSTEMCLOCK_LAYERS_LAYER_H
 
 namespace solarsystemclock {
     class Clock;
-    class Texture;
+}
+
+namespace solarsystemclock::sdl {
+    class Renderer;
 }
 
 namespace solarsystemclock::layers {
 
     class Layer {
     public:
-        Layer(SDL_Renderer *renderer, Clock *clock);
-        virtual ~Layer();
+        Layer(const sdl::Renderer &renderer, Clock *clock);
+
+        virtual ~Layer() = default;
 
         virtual void resize(int width, int height);
+
         virtual void draw();
 
     protected:
-        SDL_Renderer *m_renderer;
+        const sdl::Renderer &m_renderer;
         Clock *m_clock;
     };
 
 }
+
+#endif // SOLARSYSTEMCLOCK_LAYERS_LAYER_H

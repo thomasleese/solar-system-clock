@@ -5,9 +5,11 @@ namespace solarsystemclock {
     class Planet {
     public:
         Planet(int orbit, int diameter, int red, int green, int blue, double orbital_period, double orbit_at_2000);
+
         ~Planet();
 
         double size() const;
+
         double radius() const;
 
         double angle() const {
@@ -27,6 +29,7 @@ namespace solarsystemclock {
         }
 
         void resize(Clock *clock);
+
         void update(long ms);
 
     private:

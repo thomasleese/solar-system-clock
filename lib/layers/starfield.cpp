@@ -1,15 +1,14 @@
 #include <cstdlib>
 #include <cmath>
-#include <iostream>
-
-#include <SDL2/SDL.h>
 
 #include "solarsystemclock/clock.h"
 #include "solarsystemclock/planet.h"
-#include "solarsystemclock/texture.h"
+#include "solarsystemclock/sdl/renderer.h"
+#include "solarsystemclock/sdl/texture.h"
 
 #include "solarsystemclock/layers/starfield.h"
 
+using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
 void Star::update_position() {
@@ -17,8 +16,11 @@ void Star::update_position() {
     y = cy + std::cos(angle) * radius;
 }
 
-Starfield::Starfield(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock), m_stars(nullptr) {
-    m_star_texture = new Texture(renderer, "images/star.png");
+Starfield::Starfield(const sdl::Renderer &renderer, Clock *clock)
+        : Layer(renderer, clock),
+          m_texture(renderer, "images/star.png"),
+          m_stars(nullptr) {
+    m_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 }
 
 Starfield::~Starfield() {
@@ -42,14 +44,14 @@ void Starfield::resize(int width, int height) {
     }
 
     double orbits[] = {
-        m_clock->orbits_radius(0),
-        m_clock->orbits_radius(1),
-        m_clock->orbits_radius(2),
-        m_clock->orbits_radius(3),
-        m_clock->orbits_radius(4),
-        m_clock->orbits_radius(5),
-        m_clock->orbits_radius(6),
-        m_clock->orbits_radius(7),
+            m_clock->orbits_radius(0),
+            m_clock->orbits_radius(1),
+            m_clock->orbits_radius(2),
+            m_clock->orbits_radius(3),
+            m_clock->orbits_radius(4),
+            m_clock->orbits_radius(5),
+            m_clock->orbits_radius(6),
+            m_clock->orbits_radius(7),
     };
 
     int hw = width / 2;
@@ -118,11 +120,16 @@ void Starfield::draw() {
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];
 
-        m_star_texture->draw(
-            m_renderer,
-            star.x, star.y,
-            star.size, star.size,
-            star.r, star.g, star.b, star.a
-        );
+        m_texture.set_color_mod(star.r, star.g, star.b);
+        m_texture.set_alpha_mod(star.a);
+
+        SDL_FRect dst_rect = {
+                star.x - (star.size / 2.f),
+                star.y - (star.size / 2.f),
+                star.size,
+                star.size
+        };
+
+        m_renderer.render_copy(m_texture, nullptr, &dst_rect);
     }
 }

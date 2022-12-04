@@ -9,6 +9,7 @@ namespace solarsystemclock::sdl {
     struct Error : public std::exception {
     public:
         Error(const std::string &operation, const char *error);
+
         explicit Error(const std::string &operation, bool use_sdl_error = true);
 
         [[nodiscard]] const char *what() const noexcept override {

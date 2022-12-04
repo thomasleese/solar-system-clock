@@ -8,10 +8,12 @@
 using namespace solarsystemclock::sdl;
 
 static const uint32_t WINDOW_FLAGS = SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI;
-static const uint32_t RENDERER_FLAGS = SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE;
+static const uint32_t RENDERER_FLAGS =
+        SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE;
 
 Window::Window(const int width, const int height)
-    : m_window(SDL_CreateWindow("Solar System Clock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, WINDOW_FLAGS)) {
+        : m_window(SDL_CreateWindow("Solar System Clock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+                                    WINDOW_FLAGS)) {
     if (!m_window) {
         throw Error("Could not create window.");
     }

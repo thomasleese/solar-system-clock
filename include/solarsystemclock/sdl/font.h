@@ -10,15 +10,18 @@ typedef struct _TTF_Font TTF_Font;
 namespace solarsystemclock::sdl {
 
     class Surface;
+
     class Texture;
 
     class Font {
     public:
         explicit Font(TTF_Font *font, const std::string &filename = "", int point_size = 0);
+
         Font(const std::string &filename, int point_size);
+
         ~Font();
 
-        operator TTF_Font*() const {
+        operator TTF_Font *() const {
             return m_font;
         }
 
@@ -27,6 +30,7 @@ namespace solarsystemclock::sdl {
         }
 
         [[nodiscard]] Surface render_utf8_solid(const std::string &text, SDL_Color color) const;
+
         [[nodiscard]] Surface render_utf8_blended(const std::string &text, SDL_Color color) const;
 
     private:

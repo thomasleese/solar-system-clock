@@ -13,13 +13,15 @@ namespace solarsystemclock::sdl {
     class Window {
     public:
         Window(int width, int height);
+
         ~Window();
 
-        operator SDL_Window*() const {
+        operator SDL_Window *() const {
             return m_window;
         }
 
         [[nodiscard]] uint32_t get_id() const;
+
         void get_size(int *width, int *height) const;
 
         [[nodiscard]] Renderer &renderer() const {

@@ -1,20 +1,18 @@
 #include <algorithm>
 
-#include <SDL2/SDL.h>
-
-#include "solarsystemclock/texture.h"
+#include "solarsystemclock/sdl/renderer.h"
+#include "solarsystemclock/sdl/texture.h"
 
 #include "solarsystemclock/layers/background.h"
 
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Background::Background(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
-    m_texture = new Texture(renderer, "images/background.png");
-}
+Background::Background(const sdl::Renderer &renderer, Clock *clock)
+        : Layer(renderer, clock),
+          m_texture(renderer, "images/background.png"),
+          m_size(0), m_cx(0), m_cy(0) {
 
-Background::~Background() {
-    delete m_texture;
 }
 
 void Background::resize(int width, int height) {
@@ -24,8 +22,14 @@ void Background::resize(int width, int height) {
 }
 
 void Background::draw() {
-    SDL_SetRenderDrawColor(m_renderer, 0, 0, 0, 255);
-    SDL_RenderClear(m_renderer);
+    m_renderer.fill(0, 0, 0, 255);
 
-    m_texture->draw(m_renderer, m_cx, m_cy, m_size, m_size, 255, 255, 255, 255);
+    SDL_FRect dst_rect = {
+            static_cast<float>(m_cx - (m_size / 2.0)),
+            static_cast<float>(m_cy - (m_size / 2.0)),
+            static_cast<float>(m_size),
+            static_cast<float>(m_size)
+    };
+
+    m_renderer.render_copy(m_texture, nullptr, &dst_rect);
 }

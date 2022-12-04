@@ -15,21 +15,21 @@ Texture::Texture(SDL_Texture *texture) : m_texture(texture) {
 }
 
 Texture::Texture(SDL_Renderer *renderer, const int width, const int height)
-    : Texture(SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, width, height)) {
+        : Texture(SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, width, height)) {
 
 }
 
 Texture::Texture(SDL_Renderer *renderer, SDL_Surface *surface)
-    : Texture(SDL_CreateTextureFromSurface(renderer, surface)) {
+        : Texture(SDL_CreateTextureFromSurface(renderer, surface)) {
 
 }
 
 Texture::Texture(SDL_Renderer *renderer, const std::string &filename)
-    : Texture(renderer, Surface(filename)) {
+        : Texture(renderer, Surface(filename)) {
 
 }
 
-Texture::Texture(Texture &&other_texture) noexcept : Texture(other_texture.m_texture) {
+Texture::Texture(Texture &&other_texture) noexcept: Texture(other_texture.m_texture) {
     other_texture.m_texture = nullptr;
 }
 
@@ -48,5 +48,11 @@ void Texture::set_blend_mode(SDL_BlendMode blend_mode) {
 void Texture::set_color_mod(uint8_t red, uint8_t green, uint8_t blue) {
     if (SDL_SetTextureColorMod(*this, red, green, blue) != 0) {
         throw Error("Could not set color modifier.");
+    }
+}
+
+void Texture::set_alpha_mod(uint8_t alpha) {
+    if (SDL_SetTextureAlphaMod(*this, alpha) != 0) {
+        throw Error("Could not set alpha modifier.");
     }
 }

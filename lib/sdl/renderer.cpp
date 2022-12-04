@@ -13,7 +13,7 @@ Renderer::Renderer(SDL_Renderer *renderer) : m_renderer(renderer) {
 }
 
 Renderer::Renderer(SDL_Window *window, int index, uint32_t flags)
-    : Renderer(SDL_CreateRenderer(window, index, flags)) {
+        : Renderer(SDL_CreateRenderer(window, index, flags)) {
 
 }
 
@@ -29,6 +29,10 @@ void Renderer::set_target(SDL_Texture *texture) const {
     }
 }
 
+void Renderer::get_output_size(int *width, int *height) const {
+    SDL_GetRendererOutputSize(*this, width, height);
+}
+
 void Renderer::get_logical_size(int *width, int *height) const {
     SDL_RenderGetLogicalSize(*this, width, height);
 }
@@ -39,11 +43,12 @@ void Renderer::set_logical_size(int width, int height) {
     }
 }
 
-void Renderer::render_copy(SDL_Texture *texture, const SDL_Rect* srcrect, const SDL_FRect* dstrect) const {
+void Renderer::render_copy(SDL_Texture *texture, const SDL_Rect *srcrect, const SDL_FRect *dstrect) const {
     SDL_RenderCopyF(*this, texture, srcrect, dstrect);
 }
 
-void Renderer::render_copy(SDL_Texture *texture, const SDL_Rect* srcrect, const SDL_FRect* dstrect, const double angle, const SDL_FPoint *center, const SDL_RendererFlip flip) const {
+void Renderer::render_copy(SDL_Texture *texture, const SDL_Rect *srcrect, const SDL_FRect *dstrect, const double angle,
+                           const SDL_FPoint *center, const SDL_RendererFlip flip) const {
     SDL_RenderCopyExF(*this, texture, srcrect, dstrect, angle, center, flip);
 }
 

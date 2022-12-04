@@ -11,12 +11,16 @@ namespace solarsystemclock::sdl {
     class Surface {
     public:
         explicit Surface(SDL_Surface *surface, const std::string &filename = "");
+
         explicit Surface(const std::string &filename);
+
         Surface(Surface &&surface) noexcept;
+
         Surface(const Surface &) = delete;
+
         ~Surface();
 
-        operator SDL_Surface*() const {
+        operator SDL_Surface *() const {
             return m_surface;
         }
 

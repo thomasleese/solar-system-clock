@@ -7,17 +7,20 @@
 
 using namespace solarsystemclock::sdl;
 
-Surface::Surface(SDL_Surface *surface, const std::string &filename) : m_filename(filename), m_surface(surface) {
+Surface::Surface(SDL_Surface *surface, const std::string &filename)
+        : m_filename(filename), m_surface(surface) {
     if (!m_surface) {
         throw Error("Could not create surface.");
     }
 }
 
-Surface::Surface(const std::string &filename) : Surface(IMG_Load(filename.c_str()), filename) {
+Surface::Surface(const std::string &filename)
+        : Surface(IMG_Load(filename.c_str()), filename) {
 
 }
 
-Surface::Surface(Surface &&other_surface) noexcept : Surface(other_surface.m_surface, other_surface.m_filename) {
+Surface::Surface(Surface &&other_surface) noexcept
+        : Surface(other_surface.m_surface, other_surface.m_filename) {
     other_surface.m_filename = "";
     other_surface.m_surface = nullptr;
 }
