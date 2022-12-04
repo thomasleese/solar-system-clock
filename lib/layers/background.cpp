@@ -8,7 +8,7 @@
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Background::Background(const sdl::Renderer &renderer, Clock *clock)
+Background::Background(const sdl::Renderer &renderer, const Clock &clock)
         : Layer(renderer, clock),
           m_texture(renderer, "images/background.png"),
           m_size(0), m_cx(0), m_cy(0) {

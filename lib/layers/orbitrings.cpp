@@ -7,14 +7,14 @@
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-OrbitRings::OrbitRings(const sdl::Renderer &renderer, Clock *clock)
+OrbitRings::OrbitRings(const sdl::Renderer &renderer, const Clock &clock)
         : Layer(renderer, clock),
           m_texture(renderer, "image/orbits.png") {
 
 }
 
 void OrbitRings::resize(int width, int height) {
-    m_size = m_clock->orbits_size();
+    m_size = m_clock.orbits_size();
     m_cx = width / 2.f;
     m_cy = height / 2.f;
 }

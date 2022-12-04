@@ -15,7 +15,7 @@ namespace solarsystemclock::layers {
 
     class ClockHands : public Layer {
     public:
-        ClockHands(const sdl::Renderer &renderer, Clock *clock);
+        ClockHands(const sdl::Renderer &renderer, const Clock &clock);
 
         void resize(int width, int height) override;
 

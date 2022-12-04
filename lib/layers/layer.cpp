@@ -4,7 +4,8 @@
 
 using namespace solarsystemclock::layers;
 
-Layer::Layer(const sdl::Renderer &renderer, Clock *clock) : m_renderer(renderer), m_clock(clock) {
+Layer::Layer(const sdl::Renderer &renderer, const Clock &clock)
+        : m_renderer(renderer), m_clock(clock) {
 
 }
 

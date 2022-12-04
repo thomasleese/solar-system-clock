@@ -8,24 +8,24 @@
 
 using namespace solarsystemclock::layers;
 
-SunriseSunset::SunriseSunset(const sdl::Renderer &renderer, Clock *clock)
+SunriseSunset::SunriseSunset(const sdl::Renderer &renderer, const Clock &clock)
         : Layer(renderer, clock), m_texture(renderer, "images/shootingstar.png") {
     m_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 }
 
 void SunriseSunset::resize(int width, int height) {
-    m_radius = m_clock->orbits_radius(9);
-    m_size = m_clock->size() * 0.1;
+    m_radius = m_clock.orbits_radius(9);
+    m_size = m_clock.size() * 0.1;
 
     m_cx = width / 2;
     m_cy = height / 2;
 }
 
 void SunriseSunset::draw() {
-    double sunset_angle = m_clock->sunset_angle();
-    double sunrise_angle = m_clock->sunrise_angle();
+    double sunset_angle = m_clock.sunset_angle();
+    double sunrise_angle = m_clock.sunrise_angle();
 
-    double hours_angle = m_clock->hours_angle();
+    double hours_angle = m_clock.hours_angle();
 
     bool sunrise_happened = hours_angle < sunrise_angle;
 

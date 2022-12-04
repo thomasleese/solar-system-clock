@@ -18,7 +18,7 @@
 
 using namespace solarsystemclock;
 
-SolarSystemClock::SolarSystemClock() : m_window(800, 600), m_clock(new Clock) {
+SolarSystemClock::SolarSystemClock() : m_window(800, 600) {
     m_layers.push_back(new layers::Background(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::Starfield(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::OrbitRings(m_window.renderer(), m_clock));
@@ -35,8 +35,6 @@ SolarSystemClock::~SolarSystemClock() {
     for (auto &layer: m_layers) {
         delete layer;
     }
-
-    delete m_clock;
 }
 
 void SolarSystemClock::run() {
@@ -63,7 +61,7 @@ void SolarSystemClock::resize() {
     int width, height;
     m_window.renderer().get_output_size(&width, &height);
 
-    m_clock->resize(width, height);
+    m_clock.resize(width, height);
 
     for (auto &layer: m_layers) {
         layer->resize(width, height);
@@ -71,7 +69,7 @@ void SolarSystemClock::resize() {
 }
 
 void SolarSystemClock::draw() {
-    m_clock->update();
+    m_clock.update();
 
     for (auto &layer: m_layers) {
         layer->draw();

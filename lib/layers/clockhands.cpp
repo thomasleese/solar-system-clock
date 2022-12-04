@@ -8,25 +8,26 @@
 
 using namespace solarsystemclock::layers;
 
-ClockHands::ClockHands(const sdl::Renderer &renderer, Clock *clock) : Layer(renderer, clock),
-                                                                      m_texture(renderer, "images/hand.png") {
+ClockHands::ClockHands(const sdl::Renderer &renderer, const Clock &clock)
+        : Layer(renderer, clock),
+          m_texture(renderer, "images/hand.png") {
     m_texture.set_alpha_mod(200);
     m_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 }
 
 void ClockHands::resize(int width, int height) {
-    m_hour_radius = m_clock->orbits_radius(3);
-    m_minute_radius = m_clock->orbits_radius(5);
-    m_second_radius = m_clock->orbits_radius(7);
+    m_hour_radius = m_clock.orbits_radius(3);
+    m_minute_radius = m_clock.orbits_radius(5);
+    m_second_radius = m_clock.orbits_radius(7);
 
     m_cx = width / 2.f;
     m_cy = height / 2.f;
 }
 
 void ClockHands::draw() {
-    draw_hand(m_hour_radius, m_clock->hours_angle());
-    draw_hand(m_minute_radius, m_clock->minutes_angle());
-    draw_hand(m_second_radius, m_clock->seconds_angle());
+    draw_hand(m_hour_radius, m_clock.hours_angle());
+    draw_hand(m_minute_radius, m_clock.minutes_angle());
+    draw_hand(m_second_radius, m_clock.seconds_angle());
 }
 
 void ClockHands::draw_hand(float radius, double angle) {

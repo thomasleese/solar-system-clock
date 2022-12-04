@@ -10,9 +10,11 @@
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Planets::Planets(const sdl::Renderer &renderer, Clock *clock)
-        : Layer(renderer, clock), m_bg_texture(renderer, "images/planet-background.png"),
-          m_ball_texture(renderer, "images/planet-ball.png"), m_shadow_texture(renderer, "images/planet-shadow.png") {
+Planets::Planets(const sdl::Renderer &renderer, const Clock &clock)
+        : Layer(renderer, clock),
+          m_bg_texture(renderer, "images/planet-background.png"),
+          m_ball_texture(renderer, "images/planet-ball.png"),
+          m_shadow_texture(renderer, "images/planet-shadow.png") {
     m_bg_texture.set_alpha_mod(192);
     m_bg_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 
@@ -26,7 +28,7 @@ void Planets::resize(int width, int height) {
 }
 
 void Planets::draw() {
-    for (auto &planet: m_clock->planets()) {
+    for (auto &planet: m_clock.planets()) {
         int x = m_cx + std::sin(planet->angle()) * planet->radius();
         int y = m_cy + std::cos(planet->angle()) * planet->radius();
 

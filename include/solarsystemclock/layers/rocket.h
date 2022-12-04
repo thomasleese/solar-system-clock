@@ -15,7 +15,7 @@ namespace solarsystemclock::layers {
 
     class Rocket : public Layer {
     public:
-        Rocket(const sdl::Renderer &renderer, Clock *clock);
+        Rocket(const sdl::Renderer &renderer, const Clock &clock);
 
         void resize(int width, int height) override;
 

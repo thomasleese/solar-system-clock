@@ -13,7 +13,7 @@ namespace solarsystemclock::layers {
 
     class Layer {
     public:
-        Layer(const sdl::Renderer &renderer, Clock *clock);
+        Layer(const sdl::Renderer &renderer, const Clock &clock);
 
         virtual ~Layer() = default;
 
@@ -23,7 +23,7 @@ namespace solarsystemclock::layers {
 
     protected:
         const sdl::Renderer &m_renderer;
-        Clock *m_clock;
+        const Clock &m_clock;
     };
 
 }

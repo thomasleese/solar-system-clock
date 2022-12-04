@@ -11,7 +11,7 @@ namespace solarsystemclock::layers {
 
     class Sun : public Layer {
     public:
-        Sun(const sdl::Renderer &renderer, Clock *clock);
+        Sun(const sdl::Renderer &renderer, const Clock &clock);
 
         void resize(int width, int height) override;
 

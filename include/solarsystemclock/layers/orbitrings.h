@@ -15,12 +15,9 @@ namespace solarsystemclock::layers {
 
     class OrbitRings : public Layer {
     public:
-        OrbitRings(const SDL_Renderer &renderer, Clock *clock);
-
-        OrbitRings(const sdl::Renderer &renderer, Clock *clock);
+        OrbitRings(const sdl::Renderer &renderer, const Clock &clock);
 
         void resize(int width, int height) override;
-
         void draw() override;
 
     private:
