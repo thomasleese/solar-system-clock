@@ -29,14 +29,12 @@ namespace solarsystemclock::layers {
 
     class Starfield : public Layer {
     public:
-        Starfield(const sdl::Renderer &renderer, Clock *clock);
-
+        Starfield(const sdl::Renderer &renderer, const Clock &clock);
         ~Starfield() override;
 
         void set_rotation(int orbit, double angle);
 
         void resize(int width, int height) override;
-
         void draw() override;
 
     private:

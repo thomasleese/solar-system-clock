@@ -7,7 +7,6 @@
 
 namespace solarsystemclock::sdl {
     class Init;
-
     class Window;
 }
 
@@ -28,8 +27,8 @@ namespace solarsystemclock {
 
     private:
         sdl::Init m_sdl;
+        Clock m_clock;
         sdl::Window m_window;
-        Clock *m_clock;
         std::vector<layers::Layer *> m_layers;
     };
 

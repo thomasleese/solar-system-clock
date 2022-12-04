@@ -13,30 +13,21 @@ namespace solarsystemclock {
         ~Clock();
 
         void resize(int width, int height);
-
         void update();
 
-        double size() const;
+        float size() const;
 
         double seconds_angle() const;
-
         double minutes_angle() const;
-
         double hours_angle() const;
-
         double sunrise_angle() const;
-
         double sunset_angle() const;
 
-        double orbits_size() const;
-
+        float orbits_size() const;
         double orbits_scale() const;
-
         double orbits_start() const;
-
         double orbits_gap() const;
-
-        double orbits_radius(int orbit) const;
+        float orbits_radius(int orbit) const;
 
         const std::vector<Planet *> &planets() const {
             return m_planets;
@@ -47,7 +38,7 @@ namespace solarsystemclock {
         }
 
     private:
-        int m_size;
+        float m_size;
         SunSet *m_sun;
         std::vector<Planet *> m_planets;
 

@@ -1,3 +1,4 @@
+#include "solarsystemclock/clock.h"
 #include "solarsystemclock/sdl/init.h"
 #include "solarsystemclock/sdl/window.h"
 

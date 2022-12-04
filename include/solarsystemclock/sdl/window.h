@@ -6,6 +6,10 @@
 struct SDL_Renderer;
 struct SDL_Window;
 
+namespace spdlog {
+    class logger;
+}
+
 namespace solarsystemclock::sdl {
 
     class Renderer;
@@ -13,7 +17,6 @@ namespace solarsystemclock::sdl {
     class Window {
     public:
         Window(int width, int height);
-
         ~Window();
 
         operator SDL_Window *() const {
@@ -29,6 +32,8 @@ namespace solarsystemclock::sdl {
         }
 
     private:
+        std::shared_ptr<spdlog::logger> m_logger;
+
         SDL_Window *m_window;
         std::unique_ptr<Renderer> m_renderer;
     };

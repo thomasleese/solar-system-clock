@@ -60,7 +60,7 @@ void Clock::update() {
     }
 }
 
-double Clock::size() const {
+float Clock::size() const {
     return m_size;
 }
 
@@ -114,7 +114,7 @@ double Clock::sunset_angle() const {
     return proportion * M_PI * 2.0;
 }
 
-double Clock::orbits_size() const {
+float Clock::orbits_size() const {
     return m_size * 0.8;
 }
 
@@ -130,6 +130,6 @@ double Clock::orbits_gap() const {
     return orbits_scale() * 55.0;
 }
 
-double Clock::orbits_radius(int orbit) const {
+float Clock::orbits_radius(int orbit) const {
     return orbits_start() + orbits_gap() * orbit;
 }

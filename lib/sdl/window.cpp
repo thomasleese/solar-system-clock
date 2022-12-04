@@ -1,5 +1,7 @@
 #include <SDL.h>
 
+#include <spdlog/spdlog.h>
+
 #include "solarsystemclock/sdl/error.h"
 #include "solarsystemclock/sdl/renderer.h"
 
@@ -12,8 +14,11 @@ static const uint32_t RENDERER_FLAGS =
         SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_TARGETTEXTURE;
 
 Window::Window(const int width, const int height)
-        : m_window(SDL_CreateWindow("Solar System Clock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
+        : m_logger(spdlog::get("sdl")),
+          m_window(SDL_CreateWindow("Solar System Clock", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height,
                                     WINDOW_FLAGS)) {
+    m_logger->info("Creating window {}x{}", width, height);
+
     if (!m_window) {
         throw Error("Could not create window.");
     }
@@ -26,6 +31,8 @@ Window::Window(const int width, const int height)
 
 Window::~Window() {
     m_renderer.reset();
+
+    m_logger->info("Destroying window");
 
     if (m_window) {
         SDL_DestroyWindow(m_window);

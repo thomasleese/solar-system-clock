@@ -16,7 +16,7 @@ void Star::update_position() {
     y = cy + std::cos(angle) * radius;
 }
 
-Starfield::Starfield(const sdl::Renderer &renderer, Clock *clock)
+Starfield::Starfield(const sdl::Renderer &renderer, const Clock &clock)
         : Layer(renderer, clock),
           m_texture(renderer, "images/star.png"),
           m_stars(nullptr) {
@@ -44,14 +44,14 @@ void Starfield::resize(int width, int height) {
     }
 
     double orbits[] = {
-            m_clock->orbits_radius(0),
-            m_clock->orbits_radius(1),
-            m_clock->orbits_radius(2),
-            m_clock->orbits_radius(3),
-            m_clock->orbits_radius(4),
-            m_clock->orbits_radius(5),
-            m_clock->orbits_radius(6),
-            m_clock->orbits_radius(7),
+            m_clock.orbits_radius(0),
+            m_clock.orbits_radius(1),
+            m_clock.orbits_radius(2),
+            m_clock.orbits_radius(3),
+            m_clock.orbits_radius(4),
+            m_clock.orbits_radius(5),
+            m_clock.orbits_radius(6),
+            m_clock.orbits_radius(7),
     };
 
     int hw = width / 2;
@@ -112,10 +112,10 @@ void Starfield::draw() {
     }
 
     for (int orbit = 0; orbit <= 7; orbit++) {
-        set_rotation(orbit, m_clock->planet(orbit)->angle());
+        set_rotation(orbit, m_clock.planet(orbit)->angle());
     }
 
-    set_rotation(8, m_clock->planet(7)->angle() * 1.1);
+    set_rotation(8, m_clock.planet(7)->angle() * 1.1);
 
     for (int i = 0; i < m_no_stars; i++) {
         auto &star = m_stars[i];

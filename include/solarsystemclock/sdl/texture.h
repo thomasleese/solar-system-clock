@@ -15,15 +15,10 @@ namespace solarsystemclock::sdl {
     class Texture {
     public:
         explicit Texture(SDL_Texture *texture);
-
         Texture(SDL_Renderer *renderer, int width, int height);
-
         Texture(SDL_Renderer *renderer, SDL_Surface *surface);
-
         Texture(SDL_Renderer *renderer, const std::string &filename);
-
         Texture(Texture &&texture) noexcept;
-
         Texture(const Texture &) = delete;
 
         ~Texture();

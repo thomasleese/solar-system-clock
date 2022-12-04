@@ -1,5 +1,4 @@
 #include <SDL.h>
-#include <SDL_image.h>
 
 #include "solarsystemclock/sdl/error.h"
 #include "solarsystemclock/sdl/surface.h"

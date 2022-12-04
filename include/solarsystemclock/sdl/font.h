@@ -7,10 +7,13 @@
 struct SDL_Color;
 typedef struct _TTF_Font TTF_Font;
 
+namespace spdlog {
+    class logger;
+}
+
 namespace solarsystemclock::sdl {
 
     class Surface;
-
     class Texture;
 
     class Font {
@@ -34,6 +37,8 @@ namespace solarsystemclock::sdl {
         [[nodiscard]] Surface render_utf8_blended(const std::string &text, SDL_Color color) const;
 
     private:
+        std::shared_ptr<spdlog::logger> m_logger;
+
         std::string m_filename;
         int m_point_size;
         TTF_Font *m_font;

@@ -1,6 +1,8 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
+#include <spdlog/spdlog.h>
+
 #include "solarsystemclock/sdl/error.h"
 #include "solarsystemclock/sdl/renderer.h"
 #include "solarsystemclock/sdl/surface.h"
@@ -11,7 +13,14 @@
 using namespace solarsystemclock::sdl;
 
 Font::Font(TTF_Font *font, const std::string &filename, int point_size)
-        : m_filename(filename), m_point_size(point_size), m_font(font) {
+        : m_logger(spdlog::get("sdl")),
+        m_filename(filename),
+        m_point_size(point_size),
+        m_font(font) {
+    if (!m_filename.empty()) {
+        m_logger->info("Creating font: {} @ {}pt", m_filename, m_point_size);
+    }
+
     if (!m_font) {
         throw Error("Could not create font.", TTF_GetError());
     }
@@ -23,6 +32,10 @@ Font::Font(const std::string &filename, int point_size)
 }
 
 Font::~Font() {
+    if (!m_filename.empty()) {
+        m_logger->info("Destroying font: {} @ {}pt", m_filename, m_point_size);
+    }
+
     if (m_font) {
         TTF_CloseFont(m_font);
     }

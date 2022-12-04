@@ -15,16 +15,11 @@ namespace solarsystemclock::layers {
 
     class Planets : public Layer {
     public:
-        Planets(const SDL_Renderer &renderer, Clock *clock);
-
-        Planets(const sdl::Renderer &renderer, Clock *clock);
-
-        void resize(int width, int height) override;
+        Planets(const sdl::Renderer &renderer, const Clock &clock);
 
         void draw() override;
 
     private:
-        float m_cx, m_cy;
         sdl::Texture m_bg_texture, m_ball_texture, m_shadow_texture;
     };
 

@@ -1,6 +1,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 
+#include <spdlog/spdlog.h>
+
 #include "solarsystemclock/sdl/error.h"
 
 #include "solarsystemclock/sdl/surface.h"
@@ -8,7 +10,11 @@
 using namespace solarsystemclock::sdl;
 
 Surface::Surface(SDL_Surface *surface, const std::string &filename)
-        : m_filename(filename), m_surface(surface) {
+        : m_logger(spdlog::get("sdl")), m_filename(filename), m_surface(surface) {
+    if (!m_filename.empty()) {
+        m_logger->info("Creating surface: {}", m_filename);
+    }
+
     if (!m_surface) {
         throw Error("Could not create surface.");
     }
@@ -26,6 +32,10 @@ Surface::Surface(Surface &&other_surface) noexcept
 }
 
 Surface::~Surface() {
+    if (!m_filename.empty()) {
+        m_logger->info("Destroying surface: {}", m_filename);
+    }
+
     if (m_surface) {
         SDL_FreeSurface(m_surface);
     }

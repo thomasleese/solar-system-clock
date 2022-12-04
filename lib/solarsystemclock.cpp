@@ -10,7 +10,6 @@
 #include "solarsystemclock/layers/orbitrings.h"
 #include "solarsystemclock/layers/sun.h"
 #include "solarsystemclock/layers/planets.h"
-#include "solarsystemclock/layers/rocket.h"
 #include "solarsystemclock/layers/sunrisesunset.h"
 #include "solarsystemclock/layers/clockhands.h"
 
@@ -18,12 +17,11 @@
 
 using namespace solarsystemclock;
 
-SolarSystemClock::SolarSystemClock() : m_window(800, 600), m_clock(new Clock) {
+SolarSystemClock::SolarSystemClock() : m_window(800, 600) {
     m_layers.push_back(new layers::Background(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::Starfield(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::OrbitRings(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::Planets(m_window.renderer(), m_clock));
-    m_layers.push_back(new layers::Rocket(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::SunriseSunset(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::ClockHands(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::Sun(m_window.renderer(), m_clock));
@@ -35,8 +33,6 @@ SolarSystemClock::~SolarSystemClock() {
     for (auto &layer: m_layers) {
         delete layer;
     }
-
-    delete m_clock;
 }
 
 void SolarSystemClock::run() {
@@ -63,7 +59,7 @@ void SolarSystemClock::resize() {
     int width, height;
     m_window.renderer().get_output_size(&width, &height);
 
-    m_clock->resize(width, height);
+    m_clock.resize(width, height);
 
     for (auto &layer: m_layers) {
         layer->resize(width, height);
@@ -71,7 +67,7 @@ void SolarSystemClock::resize() {
 }
 
 void SolarSystemClock::draw() {
-    m_clock->update();
+    m_clock.update();
 
     for (auto &layer: m_layers) {
         layer->draw();
