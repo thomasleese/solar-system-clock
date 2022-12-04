@@ -1,3 +1,5 @@
+add_subdirectory(sdl)
+
 add_library(solarsystemclock_lib
     window.cpp
     texture.cpp
