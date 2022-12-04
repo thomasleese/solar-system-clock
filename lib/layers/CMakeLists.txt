@@ -5,7 +5,6 @@ add_library(solarsystemclock_layers
     orbitrings.cpp
     sun.cpp
     planets.cpp
-    rocket.cpp
     sunrisesunset.cpp
     clockhands.cpp
 )

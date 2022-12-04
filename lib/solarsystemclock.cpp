@@ -10,7 +10,6 @@
 #include "solarsystemclock/layers/orbitrings.h"
 #include "solarsystemclock/layers/sun.h"
 #include "solarsystemclock/layers/planets.h"
-#include "solarsystemclock/layers/rocket.h"
 #include "solarsystemclock/layers/sunrisesunset.h"
 #include "solarsystemclock/layers/clockhands.h"
 
@@ -23,7 +22,6 @@ SolarSystemClock::SolarSystemClock() : m_window(800, 600) {
     m_layers.push_back(new layers::Starfield(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::OrbitRings(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::Planets(m_window.renderer(), m_clock));
-    m_layers.push_back(new layers::Rocket(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::SunriseSunset(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::ClockHands(m_window.renderer(), m_clock));
     m_layers.push_back(new layers::Sun(m_window.renderer(), m_clock));
