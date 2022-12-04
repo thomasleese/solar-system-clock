@@ -11,7 +11,9 @@ using namespace std::chrono;
 
 using namespace solarsystemclock;
 
-Planet::Planet(int orbit, int diameter, int red, int green, int blue, double orbital_period, double orbit_at_2000) : m_orbit(orbit), m_diameter(diameter), m_red(red), m_green(green), m_blue(blue), m_orbital_period(orbital_period), m_orbit_at_2000(orbit_at_2000) {
+Planet::Planet(int orbit, int diameter, int red, int green, int blue, double orbital_period, double orbit_at_2000)
+        : m_orbit(orbit), m_diameter(diameter), m_red(red), m_green(green), m_blue(blue),
+          m_orbital_period(orbital_period), m_orbit_at_2000(orbit_at_2000) {
     m_angle = orbit_at_2000;
 }
 

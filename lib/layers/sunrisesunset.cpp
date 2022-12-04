@@ -1,22 +1,16 @@
-#include <algorithm>
 #include <cmath>
-#include <iostream>
-
-#include <SDL2/SDL.h>
 
 #include "solarsystemclock/clock.h"
-#include "solarsystemclock/texture.h"
+#include "solarsystemclock/sdl/texture.h"
+#include "solarsystemclock/sdl/renderer.h"
 
 #include "solarsystemclock/layers/sunrisesunset.h"
 
 using namespace solarsystemclock::layers;
 
-SunriseSunset::SunriseSunset(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
-    m_texture = new Texture(renderer, "images/shootingstar.png");
-}
-
-SunriseSunset::~SunriseSunset() {
-    delete m_texture;
+SunriseSunset::SunriseSunset(const sdl::Renderer &renderer, Clock *clock)
+        : Layer(renderer, clock), m_texture(renderer, "images/shootingstar.png") {
+    m_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 }
 
 void SunriseSunset::resize(int width, int height) {
@@ -42,10 +36,21 @@ void SunriseSunset::draw() {
 void SunriseSunset::draw_shooting_star(double angle, bool bright) {
     double radians = M_PI - angle;
 
-    int x = m_cx + std::sin(radians) * m_radius;
-    int y = m_cy + std::cos(radians) * m_radius;
+    float x = m_cx + std::sin(radians) * m_radius;
+    float y = m_cy + std::cos(radians) * m_radius;
 
     double degrees = 270.0 - radians * 180.0 / M_PI;
 
-    m_texture->draw(m_renderer, x, y, m_size, m_size, degrees, 255, 255, 255, bright ? 255 : 150);
+    m_texture.set_alpha_mod(bright ? 255 : 150);
+
+    SDL_FRect dst_rect = {
+            x - m_size / 2.f,
+            y - m_size / 2.f,
+            m_size,
+            m_size
+    };
+
+    SDL_FPoint center = {x, y};
+
+    m_renderer.render_copy(m_texture, nullptr, &dst_rect, degrees, &center, SDL_FLIP_NONE);
 }

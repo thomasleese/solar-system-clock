@@ -1,28 +1,23 @@
-#include <algorithm>
 #include <cmath>
-#include <iostream>
-
-#include <SDL2/SDL.h>
 
 #include "solarsystemclock/clock.h"
 #include "solarsystemclock/planet.h"
-#include "solarsystemclock/texture.h"
+#include "solarsystemclock/sdl/renderer.h"
+#include "solarsystemclock/sdl/texture.h"
 
 #include "solarsystemclock/layers/planets.h"
 
 using namespace solarsystemclock;
 using namespace solarsystemclock::layers;
 
-Planets::Planets(SDL_Renderer *renderer, Clock *clock) : Layer(renderer, clock) {
-    m_bg_texture = new Texture(renderer, "images/planet-background.png");
-    m_ball_texture = new Texture(renderer, "images/planet-ball.png");
-    m_shadow_texture = new Texture(renderer, "images/planet-shadow.png");
-}
+Planets::Planets(const sdl::Renderer &renderer, Clock *clock)
+        : Layer(renderer, clock), m_bg_texture(renderer, "images/planet-background.png"),
+          m_ball_texture(renderer, "images/planet-ball.png"), m_shadow_texture(renderer, "images/planet-shadow.png") {
+    m_bg_texture.set_alpha_mod(192);
+    m_bg_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 
-Planets::~Planets() {
-    delete m_bg_texture;
-    delete m_ball_texture;
-    delete m_shadow_texture;
+    m_shadow_texture.set_alpha_mod(200);
+    m_shadow_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 }
 
 void Planets::resize(int width, int height) {
@@ -31,14 +26,34 @@ void Planets::resize(int width, int height) {
 }
 
 void Planets::draw() {
-    for (auto &planet : m_clock->planets()) {
+    for (auto &planet: m_clock->planets()) {
         int x = m_cx + std::sin(planet->angle()) * planet->radius();
         int y = m_cy + std::cos(planet->angle()) * planet->radius();
 
         double degrees = 180.0 - planet->angle() * 180.0 / M_PI;
 
-        m_shadow_texture->draw(m_renderer, x, y, planet->size() * 2, planet->size() * 12.5, degrees, planet->red(), planet->green(), planet->blue(), 200);
-        m_bg_texture->draw(m_renderer, x, y, planet->size(), planet->size(), degrees, planet->red(), planet->green(), planet->blue(), 192);
-        m_ball_texture->draw(m_renderer, x, y, planet->size(), planet->size(), degrees, 255, 255, 255, 255);
+        m_shadow_texture.set_color_mod(planet->red(), planet->green(), planet->blue());
+        m_bg_texture.set_color_mod(planet->red(), planet->green(), planet->blue());
+
+        SDL_FPoint center = {m_cx, m_cy};
+
+        SDL_FRect shadow_dst_rect = {
+                static_cast<float>(x - planet->size()),
+                static_cast<float>(y - (planet->size() * 6.25f)),
+                static_cast<float>(planet->size() * 2.f),
+                static_cast<float>(planet->size() * 12.5f)
+        };
+
+        m_renderer.render_copy(m_shadow_texture, nullptr, &shadow_dst_rect, degrees, &center, SDL_FLIP_NONE);
+
+        SDL_FRect fg_dst_rect = {
+                static_cast<float>(x - (planet->size() / 2.f)),
+                static_cast<float>(y - (planet->size() / 2.f)),
+                static_cast<float>(planet->size()),
+                static_cast<float>(planet->size())
+        };
+
+        m_renderer.render_copy(m_bg_texture, nullptr, &fg_dst_rect, degrees, &center, SDL_FLIP_NONE);
+        m_renderer.render_copy(m_ball_texture, nullptr, &fg_dst_rect, degrees, &center, SDL_FLIP_NONE);
     }
 }

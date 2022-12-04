@@ -1,9 +1,13 @@
-#include "solarsystemclock/layers/layer.h"
+#ifndef SOLARSYSTEMCLOCK_LAYERS_CLOCKHANDS_H
+#define SOLARSYSTEMCLOCK_LAYERS_CLOCKHANDS_H
 
-struct SDL_Renderer;
+#include "solarsystemclock/layers/layer.h"
 
 namespace solarsystemclock {
     class Clock;
+}
+
+namespace solarsystemclock::sdl {
     class Texture;
 }
 
@@ -11,20 +15,20 @@ namespace solarsystemclock::layers {
 
     class ClockHands : public Layer {
     public:
-        ClockHands(SDL_Renderer *renderer, Clock *clock);
-        ~ClockHands();
+        ClockHands(const sdl::Renderer &renderer, Clock *clock);
 
         void resize(int width, int height) override;
+
         void draw() override;
 
-        void draw_hand(double radius, double angle);
+        void draw_hand(float radius, double angle);
 
     private:
-        Texture *m_texture;
-
-        double m_hour_radius, m_minute_radius, m_second_radius;
-
-        int m_cx, m_cy;
+        sdl::Texture m_texture;
+        float m_hour_radius, m_minute_radius, m_second_radius;
+        float m_cx, m_cy;
     };
 
 }
+
+#endif // SOLARSYSTEMCLOCK_LAYERS_CLOCKHANDS_H

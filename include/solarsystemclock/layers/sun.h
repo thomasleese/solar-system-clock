@@ -1,8 +1,9 @@
+#ifndef SOLARSYSTEMCLOCK_LAYERS_SUN_H
+#define SOLARSYSTEMCLOCK_LAYERS_SUN_H
+
 #include "solarsystemclock/layers/layer.h"
 
-struct SDL_Renderer;
-
-namespace solarsystemclock {
+namespace solarsystemclock::sdl {
     class Texture;
 }
 
@@ -10,16 +11,17 @@ namespace solarsystemclock::layers {
 
     class Sun : public Layer {
     public:
-        Sun(SDL_Renderer *renderer, Clock *clock);
-        ~Sun();
+        Sun(const sdl::Renderer &renderer, Clock *clock);
 
         void resize(int width, int height) override;
+
         void draw() override;
 
     private:
-        Texture *m_texture;
-
-        int m_size, m_cx, m_cy;
+        sdl::Texture m_texture;
+        float m_size, m_cx, m_cy;
     };
 
 }
+
+#endif // SOLARSYSTEMCLOCK_LAYERS_SUN_H
