@@ -17,12 +17,9 @@ namespace solarsystemclock::layers {
     public:
         Planets(const sdl::Renderer &renderer, const Clock &clock);
 
-        void resize(int width, int height) override;
-
         void draw() override;
 
     private:
-        float m_cx, m_cy;
         sdl::Texture m_bg_texture, m_ball_texture, m_shadow_texture;
     };
 

@@ -18,12 +18,11 @@ namespace solarsystemclock::layers {
         Rocket(const sdl::Renderer &renderer, const Clock &clock);
 
         void resize(int width, int height) override;
-
         void draw() override;
 
     private:
         sdl::Texture m_texture;
-        float m_radius, m_size, m_cx, m_cy;
+        float m_radius, m_size;
     };
 
 }

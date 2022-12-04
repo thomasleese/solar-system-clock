@@ -22,15 +22,10 @@ Planets::Planets(const sdl::Renderer &renderer, const Clock &clock)
     m_shadow_texture.set_blend_mode(SDL_BLENDMODE_BLEND);
 }
 
-void Planets::resize(int width, int height) {
-    m_cx = width / 2;
-    m_cy = height / 2;
-}
-
 void Planets::draw() {
     for (auto &planet: m_clock.planets()) {
-        int x = m_cx + std::sin(planet->angle()) * planet->radius();
-        int y = m_cy + std::cos(planet->angle()) * planet->radius();
+        float x = m_center.x + std::sin(planet->angle()) * planet->radius();
+        float y = m_center.y + std::cos(planet->angle()) * planet->radius();
 
         double degrees = 180.0 - planet->angle() * 180.0 / M_PI;
 

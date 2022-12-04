@@ -22,7 +22,7 @@ namespace solarsystemclock::layers {
 
     private:
         sdl::Texture m_texture;
-        float m_size, m_cx, m_cy;
+        float m_size;
     };
 
 }

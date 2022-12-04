@@ -11,23 +11,21 @@ using namespace solarsystemclock::layers;
 
 Rocket::Rocket(const sdl::Renderer &renderer, const Clock &clock)
         : Layer(renderer, clock),
-          m_texture(renderer, "images/rocket.png") {
+          m_texture(renderer, "images/rocket.png"), m_radius(0), m_size(0) {
 
 }
 
 void Rocket::resize(int width, int height) {
+    Layer::resize(width, height);
     m_radius = m_clock.orbits_radius(8);
     m_size = m_clock.size() * 0.06f;
-
-    m_cx = width / 2.f;
-    m_cy = height / 2.f;
 }
 
 void Rocket::draw() {
     double radians = M_PI - m_clock.seconds_angle();
 
-    float x = m_cx + std::sin(radians) * m_radius;
-    float y = m_cy + std::cos(radians) * m_radius;
+    float x = m_center.x + std::sin(radians) * m_radius;
+    float y = m_center.y + std::cos(radians) * m_radius;
 
     double degrees = 270.0 - radians * 180.0 / M_PI;
 

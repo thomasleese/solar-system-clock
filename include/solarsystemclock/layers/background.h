@@ -13,13 +13,10 @@ namespace solarsystemclock::layers {
     public:
         Background(const sdl::Renderer &renderer, const Clock &clock);
 
-        void resize(int width, int height) override;
-
         void draw() override;
 
     private:
         sdl::Texture m_texture;
-        int m_size, m_cx, m_cy;
     };
 
 }
