@@ -1,12 +1,16 @@
 #include <SDL.h>
 
+#include <spdlog/spdlog.h>
+
 #include "solarsystemclock/sdl/error.h"
 
 #include "solarsystemclock/sdl/renderer.h"
 
 using namespace solarsystemclock::sdl;
 
-Renderer::Renderer(SDL_Renderer *renderer) : m_renderer(renderer) {
+Renderer::Renderer(SDL_Renderer *renderer) : m_logger(spdlog::get("sdl")), m_renderer(renderer) {
+    m_logger->info("Creating renderer");
+
     if (!m_renderer) {
         throw Error("Could not create renderer.");
     }
@@ -18,6 +22,8 @@ Renderer::Renderer(SDL_Window *window, int index, uint32_t flags)
 }
 
 Renderer::~Renderer() {
+    m_logger->info("Destroying renderer");
+
     if (m_renderer) {
         SDL_DestroyRenderer(m_renderer);
     }

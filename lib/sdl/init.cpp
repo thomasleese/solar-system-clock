@@ -3,13 +3,17 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
+#include <spdlog/spdlog.h>
+
 #include "solarsystemclock/sdl/error.h"
 
 #include "solarsystemclock/sdl/init.h"
 
 using namespace solarsystemclock::sdl;
 
-Init::Init() {
+Init::Init() : m_logger(spdlog::stdout_color_mt("sdl")) {
+    m_logger->info("Initialising");
+
     if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
         throw Error("Could not initialise SDL.");
     }
@@ -30,6 +34,8 @@ Init::Init() {
 }
 
 Init::~Init() {
+    m_logger->info("Deinitialising");
+
     IMG_Quit();
     Mix_Quit();
     TTF_Quit();

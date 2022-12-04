@@ -6,16 +6,17 @@
 
 struct SDL_Surface;
 
+namespace spdlog {
+    class logger;
+}
+
 namespace solarsystemclock::sdl {
 
     class Surface {
     public:
         explicit Surface(SDL_Surface *surface, const std::string &filename = "");
-
         explicit Surface(const std::string &filename);
-
         Surface(Surface &&surface) noexcept;
-
         Surface(const Surface &) = delete;
 
         ~Surface();
@@ -33,6 +34,8 @@ namespace solarsystemclock::sdl {
         }
 
     private:
+        std::shared_ptr<spdlog::logger> m_logger;
+
         std::string m_filename;
         SDL_Surface *m_surface;
     };

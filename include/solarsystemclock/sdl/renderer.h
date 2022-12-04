@@ -8,6 +8,10 @@
 
 struct SDL_Window;
 
+namespace spdlog {
+    class logger;
+}
+
 namespace solarsystemclock::sdl {
 
     class Window;
@@ -27,9 +31,7 @@ namespace solarsystemclock::sdl {
         void set_target(SDL_Texture *texture = nullptr) const;
 
         void get_output_size(int *width, int *height) const;
-
         void get_logical_size(int *width, int *height) const;
-
         void set_logical_size(int width, int height);
 
         void render_copy(SDL_Texture *texture, const SDL_Rect *srcrect, const SDL_FRect *dstrect) const;
@@ -44,6 +46,8 @@ namespace solarsystemclock::sdl {
         void present() const noexcept;
 
     private:
+        std::shared_ptr<spdlog::logger> m_logger;
+
         SDL_Renderer *m_renderer;
     };
 

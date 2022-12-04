@@ -9,7 +9,7 @@ using namespace solarsystemclock::layers;
 
 OrbitRings::OrbitRings(const sdl::Renderer &renderer, const Clock &clock)
         : Layer(renderer, clock),
-          m_texture(renderer, "image/orbits.png") {
+          m_texture(renderer, "images/orbits.png") {
 
 }
 
